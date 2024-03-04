@@ -1,4 +1,4 @@
-package com.wiki.Impl;
+package com.wiki.impl;
 
 import com.wiki.model.Wiki;
 import com.wiki.servise.WikiServise;
