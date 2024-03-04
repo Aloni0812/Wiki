@@ -1,7 +1,7 @@
-package ru.proj.Wiki.servise;
+package com.wiki.servise;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ru.proj.Wiki.model.Wiki;
+import com.wiki.model.Wiki;
 
 import java.util.List;
 

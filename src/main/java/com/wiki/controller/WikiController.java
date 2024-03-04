@@ -1,10 +1,10 @@
-package ru.proj.Wiki.controller;
+package com.wiki.controller;
 
 
+import com.wiki.model.Wiki;
+import com.wiki.servise.WikiServise;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.proj.Wiki.model.Wiki;
-import ru.proj.Wiki.servise.WikiServise;
 
 import java.util.List;
 

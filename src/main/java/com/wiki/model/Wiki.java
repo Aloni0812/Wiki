@@ -1,4 +1,4 @@
-package ru.proj.Wiki.model;
+package com.wiki.model;
 
 import lombok.Builder;
 import lombok.Data;

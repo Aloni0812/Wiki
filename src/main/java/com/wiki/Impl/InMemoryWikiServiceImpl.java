@@ -1,10 +1,10 @@
-package ru.proj.Wiki.Impl;
+package com.wiki.Impl;
 
+import com.wiki.model.Wiki;
+import com.wiki.servise.WikiServise;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.proj.Wiki.model.Wiki;
-import ru.proj.Wiki.repository.InMemoryWikiDAO;
-import ru.proj.Wiki.servise.WikiServise;
+import com.wiki.repository.InMemoryWikiDAO;
 
 import java.util.List;
 
@@ -19,14 +19,14 @@ private final InMemoryWikiDAO repository;
     }
 
     @Override
-    public Wiki saveWiki(Wiki Wiki) { return repository.saveWiki(Wiki); }
+    public Wiki saveWiki(Wiki wiki) { return repository.saveWiki(wiki); }
     @Override
     public Wiki findByRequest(String request) {
         return repository.findByRequest(request);
     }
     @Override
-    public Wiki updateWiki(Wiki Wiki) {
-        return updateWiki(Wiki);
+    public Wiki updateWiki(Wiki wiki) {
+        return updateWiki(wiki);
     }
     @Override
     public void deleteWiki(String request) {

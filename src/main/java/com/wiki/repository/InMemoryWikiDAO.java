@@ -1,27 +1,26 @@
-package ru.proj.Wiki.repository;
+package com.wiki.repository;
 
-import lombok.Getter;
+import com.wiki.model.Wiki;
 import org.springframework.stereotype.Repository;
-import ru.proj.Wiki.model.Wiki;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class InMemoryWikiDAO {
-        private final List<Wiki> WIKI = new ArrayList<>();
+        private final List<Wiki> wikiList = new ArrayList<>();
 
         public List<Wiki> findAllWiki() {
-            return WIKI;
+            return wikiList;
         }
 
         public Wiki saveWiki(Wiki wiki) {
-            WIKI.add(wiki);
+            wikiList.add(wiki);
             return wiki;
         }
 
         public Wiki findByRequest(String request) {
-            for (Wiki element : WIKI) {
+            for (Wiki element : wikiList) {
                 if (element.getRequestWiki().equals(request)) {
                     return element;
                 }
@@ -30,17 +29,17 @@ public class InMemoryWikiDAO {
 
         }
 
-        public Wiki updateWiki(Wiki Wiki) {
+        public Wiki updateWiki(Wiki wiki) {
             int wikiIndex = -1;
-            for (int i = 0; i < WIKI.size(); i++) {
-                if (WIKI.get(i).getRequestWiki().equals(Wiki.getRequestWiki())) {
+            for (int i = 0; i < wikiList.size(); i++) {
+                if (wikiList.get(i).getRequestWiki().equals(wiki.getRequestWiki())) {
                     wikiIndex = i;
                     break;
                 }
             }
             if (wikiIndex > -1) {
-                WIKI.set(wikiIndex, Wiki);
-                return Wiki;
+                wikiList.set(wikiIndex, wiki);
+                return wiki;
             }
             return null;
         }
@@ -48,7 +47,7 @@ public class InMemoryWikiDAO {
         public void deleteWiki(String request) {
             var student = findByRequest(request);
             if (student != null) {
-                WIKI.remove(student);
+                wikiList.remove(student);
             }
 
         }
