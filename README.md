@@ -8,8 +8,8 @@ Basic REST service
 ## Sonarcloud
 https://sonarcloud.io/summary/new_code?id=Aloni0812_Wiki2
 ## Realization
-- WikiController
-- InMemoryWikiServiceImpl
-- Wiki
-- InMemoryWikiDAO
-- WikiServise
+- WikiController: This class is a Spring MVC controller that handles incoming HTTP requests related to a wiki application, such as creating, editing, or deleting wiki pages.
+- InMemoryWikiServiceImpl: This class implements the WikiService interface and provides business logic for managing wiki pages using an in-memory database.
+- Wiki: This class represents a wiki page with attributes such as title, content, and author.
+- InMemoryWikiDAO: This class is a data access object that provides methods to interact with an in-memory database to store and retrieve wiki page information.
+- WikiService: This interface defines methods for managing wiki pages, such as creating a new page, editing existing pages, or retrieving page information.
