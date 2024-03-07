@@ -20,7 +20,7 @@ public class WikiController {
     }
 
     @PostMapping("saveWiki")
-    public String saveStudent(@RequestBody Wiki wiki) {
+    public String saveWiki(@RequestBody Wiki wiki) {
         service.saveWiki(wiki);
         return "Wiki successfully saved";
     }

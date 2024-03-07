@@ -25,8 +25,7 @@ private final InMemoryWikiDAO repository;
         return repository.findByRequest(request);
     }
     @Override
-    public Wiki updateWiki(Wiki wiki) {
-        return updateWiki(wiki);
+    public Wiki updateWiki(Wiki wiki) {return repository.updateWiki(wiki);
     }
     @Override
     public void deleteWiki(String request) {

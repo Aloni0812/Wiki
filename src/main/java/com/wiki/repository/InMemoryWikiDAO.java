@@ -45,9 +45,9 @@ public class InMemoryWikiDAO {
         }
 
         public void deleteWiki(String request) {
-            var student = findByRequest(request);
-            if (student != null) {
-                wikiList.remove(student);
+            var wiki = findByRequest(request);
+            if (wiki != null) {
+                wikiList.remove(wiki);
             }
 
         }
