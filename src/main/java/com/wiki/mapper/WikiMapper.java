@@ -15,7 +15,6 @@ public class WikiMapper {
     public static WikiDto toDto(final Wiki wiki) {
         if (wiki != null) {
             WikiDto wikiDto = new WikiDto();
-            //    wikiDto.setId(wiki.getId());
             wikiDto.setRequestWiki(wiki.getRequestWiki());
             wikiDto.setAnswerWiki(wiki.getAnswerWiki());
             return wikiDto;

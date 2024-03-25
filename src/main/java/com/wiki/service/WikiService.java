@@ -28,8 +28,7 @@ public class WikiService {
     }
 
     public Wiki findByRequest(String requestWiki) {
-        Wiki wiki = wikiRepository.findWikiByRequestWiki(requestWiki);
-        return wiki;
+        return wikiRepository.findWikiByRequestWiki(requestWiki);
     }
 
     public void deleteWiki(String requestWiki) {

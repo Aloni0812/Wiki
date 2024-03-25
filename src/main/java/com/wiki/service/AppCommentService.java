@@ -29,8 +29,7 @@ public class AppCommentService {
     }
 
     public AppComment findAppComment(Long id) {
-        AppComment appComment = appCommentRepository.findAppCommentById(id);
-        return appComment;
+        return appCommentRepository.findAppCommentById(id);
     }
 
     public void deleteAppComment(Long id) {

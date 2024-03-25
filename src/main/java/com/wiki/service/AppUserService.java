@@ -15,8 +15,8 @@ import java.util.List;
 @Transactional
 @AllArgsConstructor
 public class AppUserService {
-    private final AppCommentRepository AppCommentRepository;
-    private final AppUserRepository AppUserRepository;
+    private final AppCommentRepository appCommentRepository;
+    private final AppUserRepository appUserRepository;
     private final WikiRepository wikiRepository;
 
     private final List<AppUser> appUserList = new ArrayList<>();
