@@ -1,8 +1,9 @@
 package com.wiki.controller;
 
 
+import com.wiki.dto.WikiDto;
 import com.wiki.model.Wiki;
-import com.wiki.servise.WikiServise;
+import com.wiki.service.WikiService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,22 +13,20 @@ import java.util.List;
 @RequestMapping("/api/v1/Wiki")
 @AllArgsConstructor
 public class WikiController {
-    private final WikiServise service;
+    private final WikiService service;
 
     @GetMapping
-    public List<Wiki> findAllWIKI() {
+    public List<Wiki> findAllWiki() {
         return service.findAllWiki();
     }
 
     @PostMapping("saveWiki")
-    public String saveWiki(@RequestBody Wiki wiki) {
-        service.saveWiki(wiki);
-        return "Wiki successfully saved";
+    public Wiki saveWiki(@RequestBody WikiDto wikiDto) {;
+        return service.saveWiki(wikiDto);
     }
 
     @GetMapping("findByRequest")
     public Wiki findByRequest(@RequestParam String request) {
-
         return service.findByRequest(request);
     }
 
@@ -38,7 +37,6 @@ public class WikiController {
 
     @DeleteMapping("deleteWiki")
     public void deleteWiki(@RequestParam String request) {
-
         service.deleteWiki(request);
     }
 }
