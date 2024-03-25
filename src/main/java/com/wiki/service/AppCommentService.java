@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -62,11 +63,11 @@ public class AppCommentService {
         }
         if (wikiRepository.findWikiByRequestWiki(appComment.getWiki().getRequestWiki()) == null) {
             wiki.addAppComment(appComment);
-            wikiRepository.saveAndFlush(wiki);
+            wikiRepository.save(wiki);
         } else {
             wiki = wikiRepository.findWikiByRequestWiki(appComment.getWiki().getRequestWiki());
             wiki.addAppComment(appComment);
         }
-        return appComment;
+        return appCommentRepository.save(Objects.requireNonNull(AppCommentMapper.toEntity(appCommentDto)));
     }
 }

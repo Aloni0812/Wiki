@@ -20,7 +20,6 @@ public class AppCommentMapper {
     public static AppComment toEntity(final AppCommentDto appCommentDto) {
         if (appCommentDto != null) {
             AppComment appComment = new AppComment();
-            appComment.setId(appCommentDto.getId());
             appComment.setAuthor(appCommentDto.getAuthor());
             appComment.setText(appCommentDto.getText());
             appComment.setTime(appCommentDto.getTime());

@@ -61,16 +61,7 @@ public class WikiService {
     }
 
     public Wiki saveWiki(final WikiDto wikiDto) {
-        Wiki wiki = WikiMapper.toEntity(wikiDto);
-        List<AppComment> commentList = new ArrayList<>();
-        for (AppCommentDto appCommentDto : wikiDto.getAppComment()) {
-            AppComment appComment = AppCommentMapper.toEntity(appCommentDto);
-            appComment.setWiki(wiki);
-            commentList.add(appComment);
-        }
-        wiki.setAppCommentList(commentList);
-        wikiList.add(wiki);
-        return wiki;
+        return wikiRepository.save(WikiMapper.toEntity(wikiDto));
     }
 
 }

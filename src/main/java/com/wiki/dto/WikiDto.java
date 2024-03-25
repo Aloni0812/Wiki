@@ -13,7 +13,7 @@ public class WikiDto {
     private Long id;
     private String requestWiki;
     private String answerWiki;
-    private List<AppCommentDto> commentDtoList = new ArrayList<>();
+    private List<AppCommentDto> commentDtoList;
     public List<AppCommentDto> getAppComment(){return commentDtoList;}
     public void setAppComment(List<AppCommentDto> commentDtoInput)
     {
