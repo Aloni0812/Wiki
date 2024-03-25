@@ -1,6 +1,5 @@
 package com.wiki.service;
 
-import com.wiki.dto.AppUserDto;
 import com.wiki.model.AppUser;
 import com.wiki.repository.AppCommentRepository;
 import com.wiki.repository.AppUserRepository;

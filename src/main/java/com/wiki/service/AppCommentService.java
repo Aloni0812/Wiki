@@ -3,7 +3,6 @@ package com.wiki.service;
 import com.wiki.dto.AppCommentDto;
 import com.wiki.mapper.AppCommentMapper;
 import com.wiki.model.AppComment;
-import com.wiki.model.Wiki;
 import com.wiki.repository.AppCommentRepository;
 import com.wiki.repository.AppUserRepository;
 import com.wiki.repository.WikiRepository;
@@ -11,7 +10,6 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

@@ -1,6 +1,5 @@
 package com.wiki.controller;
 
-import com.wiki.dto.AppUserDto;
 import com.wiki.model.AppUser;
 import com.wiki.service.AppUserService;
 import lombok.AllArgsConstructor;
