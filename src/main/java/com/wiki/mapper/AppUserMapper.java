@@ -10,7 +10,6 @@ public class AppUserMapper {
     public static AppUserDto toDto(final AppUser appUser) {
         if (appUser != null) {
             AppUserDto appUserDto = new AppUserDto();
-            appUserDto.setId(appUser.getId());
             appUserDto.setName(appUser.getName());
             appUserDto.setAppMail(appUser.getAppMail());
             appUserDto.setPassword(appUser.getPassword());
@@ -22,7 +21,6 @@ public class AppUserMapper {
     public static AppUser toEntity(final AppUserDto appUserDto) {
         if (appUserDto != null) {
             AppUser appUser = new AppUser();
-            appUser.setId(appUserDto.getId());
             appUser.setAppMail(appUserDto.getAppMail());
             appUser.setName(appUserDto.getName());
             appUser.setPassword(appUserDto.getPassword());

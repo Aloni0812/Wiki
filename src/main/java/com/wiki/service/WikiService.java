@@ -25,7 +25,7 @@ public class WikiService {
     private final WikiRepository wikiRepository;
     private final List<Wiki> wikiList= new ArrayList<>();
     public List<Wiki> findAllWiki(){
-        return wikiList;
+        return wikiRepository.findAll();
     }
 
     public Wiki findByRequest(String requestWiki) {

@@ -1,5 +1,6 @@
 package com.wiki.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -9,9 +10,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppCommentDto {
-    private Long id;
+    @JsonProperty("author")
     private String author;
+    @JsonProperty("text")
     private String text;
-    private LocalDateTime time;
+    @JsonProperty("time")
+    private LocalDateTime time=LocalDateTime.now();
+    @JsonProperty("wikiDto")
     private WikiDto wikiDto;
 }

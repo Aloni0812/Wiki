@@ -8,7 +8,6 @@ public class AppCommentMapper {
     public static AppCommentDto toDto(final AppComment appComment){
         if (appComment !=null){
             AppCommentDto appCommentDto = new AppCommentDto();
-            appCommentDto.setId(appComment.getId());
             appCommentDto.setAuthor(appComment.getAuthor());
             appCommentDto.setText(appComment.getText());
             appCommentDto.setTime(appComment.getTime());

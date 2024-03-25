@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@Table(name = "wiki")
+@Table(name = "wiki")
 @Entity
 public class Wiki {
     @Id

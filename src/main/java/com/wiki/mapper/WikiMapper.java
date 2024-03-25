@@ -28,8 +28,8 @@ public class WikiMapper {
              wiki.setAnswerWiki(wikiDto.getAnswerWiki());
              if (wikiDto.getAppComment()==null)
              return wiki;
-            List<AppComment> appCommentList =new ArrayList<>();
-            for(AppCommentDto appCommentDto: wikiDto.getCommentDtoList()){
+            List<AppComment> appCommentList = new ArrayList<>();
+            for(AppCommentDto appCommentDto: wikiDto.getAppComment()){
                 appCommentList.add(AppCommentMapper.toEntity(appCommentDto));
             }
             wiki.setAppCommentList(appCommentList);
