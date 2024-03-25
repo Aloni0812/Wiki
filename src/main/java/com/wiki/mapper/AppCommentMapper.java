@@ -3,10 +3,14 @@ package com.wiki.mapper;
 import com.wiki.dto.AppCommentDto;
 import com.wiki.model.AppComment;
 
+import java.time.LocalDateTime;
+
 public class AppCommentMapper {
-    private AppCommentMapper(){}
-    public static AppCommentDto toDto(final AppComment appComment){
-        if (appComment !=null){
+    private AppCommentMapper() {
+    }
+
+    public static AppCommentDto toDto(final AppComment appComment) {
+        if (appComment != null) {
             AppCommentDto appCommentDto = new AppCommentDto();
             appCommentDto.setAuthor(appComment.getAuthor());
             appCommentDto.setText(appComment.getText());
@@ -21,7 +25,7 @@ public class AppCommentMapper {
             AppComment appComment = new AppComment();
             appComment.setAuthor(appCommentDto.getAuthor());
             appComment.setText(appCommentDto.getText());
-            appComment.setTime(appCommentDto.getTime());
+            appComment.setTime(LocalDateTime.now());
             return appComment;
         }
         return null;

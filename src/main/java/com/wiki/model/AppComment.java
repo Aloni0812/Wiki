@@ -18,9 +18,5 @@ public class AppComment {
     private Long id;
     private String author;
     private String text;
-    @Transient
     private LocalDateTime time;
-
-    @ManyToOne
-    private Wiki wiki;
 }

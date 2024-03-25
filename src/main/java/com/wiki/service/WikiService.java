@@ -13,6 +13,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +24,9 @@ public class WikiService {
     private final AppCommentRepository appCommentRepository;
     private final AppUserRepository appUserRepository;
     private final WikiRepository wikiRepository;
-    private final List<Wiki> wikiList= new ArrayList<>();
-    public List<Wiki> findAllWiki(){
+    private final List<Wiki> wikiList = new ArrayList<>();
+
+    public List<Wiki> findAllWiki() {
         return wikiRepository.findAll();
     }
 
@@ -55,6 +57,7 @@ public class WikiService {
         }
         if (wikiIndex > -1) {
             wikiList.set(wikiIndex, wiki);
+
             return wiki;
         }
         return null;

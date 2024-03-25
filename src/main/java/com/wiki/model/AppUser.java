@@ -19,7 +19,4 @@ public class AppUser {
     private String appMail;
     private String name;
     private String password;
-
- //   @ManyToMany(mappedBy = "appUsers")
-  //  private List<Wiki> wiki = new ArrayList<>();
 }

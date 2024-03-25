@@ -31,7 +31,7 @@ public class AppUserService {
         return appUser;
     }
 
-    public AppUser findByAppMail(String appMail) {
+    public AppUser findAppUserByAppMail(String appMail) {
         for (AppUser element : appUserList) {
             if (element.getAppMail().equals(appMail)) {
                 return element;
@@ -57,7 +57,7 @@ public class AppUserService {
     }
 
     public void deleteAppUser(String appMail) {
-        var appUser = findByAppMail(appMail);
+        var appUser = findAppUserByAppMail(appMail);
         if (appUser != null) {
             appUserList.remove(appUser);
         }

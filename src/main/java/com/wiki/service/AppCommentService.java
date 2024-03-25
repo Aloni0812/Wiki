@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,8 +24,9 @@ public class AppCommentService {
     private final AppUserRepository appUserRepository;
     private final WikiRepository wikiRepository;
 
-    private final List<AppComment> appCommentList= new ArrayList<>();
-    public List<AppComment> findAllAppComment(){
+    private final List<AppComment> appCommentList = new ArrayList<>();
+
+    public List<AppComment> findAllAppComment() {
         return appCommentList;
     }
 
@@ -34,9 +36,9 @@ public class AppCommentService {
     }
 
     public void deleteAppComment(Long id) {
-     AppComment appComment =findAppComment(id);
-     if (appComment!=null)
-         appCommentList.remove(appComment);
+        AppComment appComment = findAppComment(id);
+        if (appComment != null)
+            appCommentList.remove(appComment);
     }
 
 
@@ -56,20 +58,6 @@ public class AppCommentService {
     }
 
     public AppComment saveAppComment(AppCommentDto appCommentDto) {
-        AppComment appComment = AppCommentMapper.toEntity(appCommentDto);
-        Wiki wiki = appComment.getWiki();
-        if (wiki == null) {
-            return null;
-        }
-        if (wikiRepository.findWikiByRequestWiki(appComment.getWiki().getRequestWiki()) == null) {
-            wiki.addAppComment(appComment);
-            wikiRepository.save(wiki);
-
-        } else {
-            wiki = wikiRepository.findWikiByRequestWiki(appComment.getWiki().getRequestWiki());
-            wiki.addAppComment(appComment);
-        }
-
         return appCommentRepository.save(Objects.requireNonNull(AppCommentMapper.toEntity(appCommentDto)));
     }
 }

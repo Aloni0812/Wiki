@@ -13,8 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 public class AppUserController {
     private final AppUserService service;
+
     @GetMapping
-    public List<AppUser> findAllAppUser(){return service.findAllAppUser();}
+    public List<AppUser> findAllAppUser() {
+        return service.findAllAppUser();
+    }
 
     @PostMapping("saveAppUser")
     public AppUser saveAppUser(@RequestBody AppUser appUser) {
@@ -24,7 +27,7 @@ public class AppUserController {
     @GetMapping("findByAppMail")
     public AppUser findByAppMail(@RequestParam String appMail) {
 
-        return service.findByAppMail(appMail);
+        return service.findAppUserByAppMail(appMail);
     }
 
     @PutMapping("updateAppUser")

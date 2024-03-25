@@ -21,7 +21,8 @@ public class WikiController {
     }
 
     @PostMapping("saveWiki")
-    public Wiki saveWiki(@RequestBody WikiDto wikiDto) {;
+    public Wiki saveWiki(@RequestBody WikiDto wikiDto) {
+        ;
         return service.saveWiki(wikiDto);
     }
 

@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class WikiDto {
     @JsonProperty("requestWiki")
     private String requestWiki;
@@ -17,9 +18,4 @@ public class WikiDto {
     private String answerWiki;
     @JsonProperty("commentDtoList")
     private List<AppCommentDto> commentDtoList;
-    public List<AppCommentDto> getAppComment(){return commentDtoList;}
-    public void setAppComment(List<AppCommentDto> commentDtoInput)
-    {
-        this.commentDtoList=commentDtoInput;
-    }
 }
