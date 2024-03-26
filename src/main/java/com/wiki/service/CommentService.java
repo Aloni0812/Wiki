@@ -3,7 +3,6 @@ package com.wiki.service;
 import com.wiki.dto.CommentDto;
 import com.wiki.mapper.CommentMapper;
 import com.wiki.model.Comment;
-import com.wiki.model.User;
 import com.wiki.model.Wiki;
 import com.wiki.repository.CommentRepository;
 import com.wiki.repository.UserRepository;
@@ -20,7 +19,6 @@ import java.util.Objects;
 @AllArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
-    private final UserRepository UserRepository;
     private final WikiRepository wikiRepository;
 
     public List<Comment> findAllComment() {

@@ -18,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 public class WikiService {
     private final CommentRepository commentRepository;
-    private final UserRepository UserRepository;
     private final WikiRepository wikiRepository;
 
     public List<Wiki> findAllWiki() {
