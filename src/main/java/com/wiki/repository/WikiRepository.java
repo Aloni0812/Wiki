@@ -9,8 +9,6 @@ import java.util.List;
 @Repository
 public interface WikiRepository extends JpaRepository<Wiki, Long> {
     Wiki findWikiByRequestWiki(String requestWiki);
-
     Wiki saveAndFlush(Wiki wiki);
-
     List<Wiki> findAll();
 }

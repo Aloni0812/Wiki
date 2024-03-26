@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AppUserDto {
+public class UserDto {
     @JsonProperty("appMail")
     private String appMail;
     @JsonProperty("name")

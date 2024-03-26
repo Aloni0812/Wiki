@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AppCommentDto {
+public class CommentDto {
+    private Long id;
     @JsonProperty("author")
     private String author;
     @JsonProperty("text")

@@ -16,5 +16,5 @@ public class WikiDto {
     @JsonProperty("answerWiki")
     private String answerWiki;
     @JsonProperty("commentDtoList")
-    private List<AppCommentDto> commentDtoList;
+    private List<CommentDto> commentDtoList;
 }

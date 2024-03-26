@@ -1,8 +1,8 @@
 package com.wiki.mapper;
 
-import com.wiki.dto.AppCommentDto;
+import com.wiki.dto.CommentDto;
 import com.wiki.dto.WikiDto;
-import com.wiki.model.AppComment;
+import com.wiki.model.Comment;
 import com.wiki.model.Wiki;
 
 import java.util.ArrayList;
@@ -29,12 +29,12 @@ public class WikiMapper {
             wiki.setAnswerWiki(wikiDto.getAnswerWiki());
             if (wikiDto.getCommentDtoList() == null)
                 return wiki;
-            List<AppComment> appCommentList = new ArrayList<>();
-            for (AppCommentDto appCommentDto : wikiDto.getCommentDtoList()) {
-                appCommentList.add(AppCommentMapper.toEntity(appCommentDto));
+            List<Comment> commentList = new ArrayList<>();
+            for (CommentDto commentDto : wikiDto.getCommentDtoList()) {
+                commentList.add(CommentMapper.toEntity(commentDto));
 
             }
-            wiki.setAppCommentList(appCommentList);
+            wiki.setCommentList(commentList);
             return wiki;
         }
         return null;

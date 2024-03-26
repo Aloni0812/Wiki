@@ -2,10 +2,10 @@ package com.wiki.service;
 
 import com.wiki.dto.WikiDto;
 import com.wiki.mapper.WikiMapper;
-import com.wiki.model.AppComment;
+import com.wiki.model.Comment;
 import com.wiki.model.Wiki;
-import com.wiki.repository.AppCommentRepository;
-import com.wiki.repository.AppUserRepository;
+import com.wiki.repository.CommentRepository;
+import com.wiki.repository.UserRepository;
 import com.wiki.repository.WikiRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -18,10 +18,9 @@ import java.util.List;
 @Transactional
 @AllArgsConstructor
 public class WikiService {
-    private final AppCommentRepository appCommentRepository;
-    private final AppUserRepository appUserRepository;
+    private final CommentRepository commentRepository;
+    private final UserRepository UserRepository;
     private final WikiRepository wikiRepository;
-    private final List<Wiki> wikiList = new ArrayList<>();
 
     public List<Wiki> findAllWiki() {
         return wikiRepository.findAll();
@@ -34,29 +33,18 @@ public class WikiService {
     public void deleteWiki(String requestWiki) {
         Wiki wikiDelete = wikiRepository.findWikiByRequestWiki(requestWiki);
         if (wikiDelete != null) {
-            List<AppComment> appCommentDelete = wikiDelete.getAppCommentList();
-            if (appCommentDelete != null && !appCommentDelete.isEmpty()) {
-                appCommentRepository.deleteAll(appCommentDelete);
+            List<Comment> commentDelete = wikiDelete.getCommentList();
+            if (commentDelete != null && !commentDelete.isEmpty()) {
+                commentRepository.deleteAll(commentDelete);
             }
             wikiRepository.delete(wikiDelete);
         }
     }
 
-
-    public Wiki updateWiki(Wiki wiki) {
-        int wikiIndex = -1;
-        for (int i = 0; i < wikiList.size(); i++) {
-            if (wikiList.get(i).getRequestWiki().equals(wiki.getRequestWiki())) {
-                wikiIndex = i;
-                break;
-            }
-        }
-        if (wikiIndex > -1) {
-            wikiList.set(wikiIndex, wiki);
-
-            return wiki;
-        }
-        return null;
+    public Wiki updateWiki(WikiDto wikidto) {
+        wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki()).setAnswerWiki(wikidto.getAnswerWiki());
+        wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki()).setCommentList(WikiMapper.toEntity(wikidto).getCommentList());
+        return wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki());
     }
 
     public Wiki saveWiki(final WikiDto wikiDto) {

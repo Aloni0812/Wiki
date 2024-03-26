@@ -31,8 +31,8 @@ public class WikiController {
     }
 
     @PutMapping("updateWiki")
-    public Wiki updateWiki(@RequestBody Wiki wiki) {
-        return service.updateWiki(wiki);
+    public Wiki updateWiki(@RequestBody WikiDto wikidto) {
+        return service.updateWiki(wikidto);
     }
 
     @DeleteMapping("deleteWiki")
