@@ -2,7 +2,10 @@ package com.wiki.controller;
 
 import com.wiki.dto.CommentDto;
 import com.wiki.model.Comment;
+import com.wiki.model.User;
+import com.wiki.model.Wiki;
 import com.wiki.service.CommentService;
+import com.wiki.service.WikiService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +27,17 @@ public class CommentController {
         return service.saveComment(comment);
     }
 
+    @GetMapping("findById")
+    public Comment findById(@RequestParam Long id) {
+        return service.findComment(id);
+    }
+
     @PutMapping("updateComment")
     public Comment updateComment(@RequestBody CommentDto commentDto) {
         return service.updateComment(commentDto);
     }
 
-    @DeleteMapping("deleteAppCommment")
+    @DeleteMapping("deleteCommment")
     public void deleteComment(@RequestParam Long id) {
         service.deleteComment(id);
     }

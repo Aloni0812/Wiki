@@ -3,6 +3,8 @@ package com.wiki.service;
 import com.wiki.dto.CommentDto;
 import com.wiki.mapper.CommentMapper;
 import com.wiki.model.Comment;
+import com.wiki.model.User;
+import com.wiki.model.Wiki;
 import com.wiki.repository.CommentRepository;
 import com.wiki.repository.UserRepository;
 import com.wiki.repository.WikiRepository;
@@ -29,10 +31,14 @@ public class CommentService {
         return commentRepository.findCommentById(id);
     }
 
-    public void deleteComment(Long id) {
-        Comment comment = findComment(id);
-        if (comment != null)
-            commentRepository.delete(comment);
+    public void deleteComment(Long id){
+        Comment comment = commentRepository.findCommentById(id);
+        if (comment == null)
+            return;
+        Wiki wiki = wikiRepository.findWikiByCommentListContains(comment);
+        if(wiki != null)
+            wiki.getCommentList().remove(comment);
+        commentRepository.deleteById(id);
     }
 
 

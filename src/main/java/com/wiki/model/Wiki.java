@@ -21,5 +21,5 @@ public class Wiki {
     @Column(columnDefinition = "text")
     private String answerWiki;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Comment> commentList;
+    public List<Comment> commentList;
 }
