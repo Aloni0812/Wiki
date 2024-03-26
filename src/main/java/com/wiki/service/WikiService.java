@@ -47,10 +47,4 @@ public class WikiService {
     public Wiki saveWiki(final WikiDto wikiDto) {
         return wikiRepository.save(WikiMapper.toEntity(wikiDto));
     }
-
-    public Wiki getWikiWithCommentID(Long id) {
-        Comment comment = commentRepository.findCommentById(id);
-        return wikiRepository.findWikiByCommentListContains(comment);
-    }
-
 }
