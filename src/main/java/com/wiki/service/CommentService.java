@@ -5,7 +5,6 @@ import com.wiki.mapper.CommentMapper;
 import com.wiki.model.Comment;
 import com.wiki.model.Wiki;
 import com.wiki.repository.CommentRepository;
-import com.wiki.repository.UserRepository;
 import com.wiki.repository.WikiRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
