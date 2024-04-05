@@ -1,5 +1,6 @@
 package com.wiki.service;
 
+import com.wiki.cache.DataCache;
 import com.wiki.dto.CommentDto;
 import com.wiki.mapper.CommentMapper;
 import com.wiki.model.Comment;
@@ -19,12 +20,22 @@ import java.util.Objects;
 public class CommentService {
     private final CommentRepository commentRepository;
     private final WikiRepository wikiRepository;
+    private final DataCache commentCahce;
 
     public List<Comment> findAllComment() {
+        //return commentRepository.findAll();
+        Object cacheObject = commentCahce.get("all");
+        if(cacheObject instanceof List<?> list && list.get(0) instanceof Comment && !list.isEmpty())
+            return (List<Comment>) list;
+        commentCahce.put("all",commentRepository.findAll());
         return commentRepository.findAll();
     }
 
     public Comment findComment(Long id) {
+        Object cacheObject=commentCahce.get(id.toString());
+        if(cacheObject instanceof Comment commentObject)
+            return commentObject;
+        commentCahce.put(id.toString(),commentRepository.findCommentById(id));
         return commentRepository.findCommentById(id);
     }
 
@@ -36,15 +47,21 @@ public class CommentService {
         if(wiki != null)
             wiki.getCommentList().remove(comment);
         commentRepository.deleteById(id);
+        commentCahce.remove(id.toString());
     }
 
 
     public Comment updateComment(CommentDto commentDto) {
       commentRepository.findCommentById(commentDto.getId()).setText(commentDto.getText());
+      commentCahce.remove(commentDto.getId().toString());
+      commentCahce.put(commentDto.getId().toString(),commentDto);
       return commentRepository.findCommentById(commentDto.getId());
     }
 
     public Comment saveComment(CommentDto commentDto) {
-        return commentRepository.save(Objects.requireNonNull(CommentMapper.toEntity(commentDto)));
+        Comment comment=Objects.requireNonNull(CommentMapper.toEntity(commentDto));
+        commentRepository.save(comment);
+        commentCahce.put(comment.getId().toString(),comment);
+        return comment;
     }
 }

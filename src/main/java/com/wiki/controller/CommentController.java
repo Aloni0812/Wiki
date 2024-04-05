@@ -2,10 +2,7 @@ package com.wiki.controller;
 
 import com.wiki.dto.CommentDto;
 import com.wiki.model.Comment;
-import com.wiki.model.User;
-import com.wiki.model.Wiki;
 import com.wiki.service.CommentService;
-import com.wiki.service.WikiService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

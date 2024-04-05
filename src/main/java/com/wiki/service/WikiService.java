@@ -1,5 +1,6 @@
 package com.wiki.service;
 
+import com.wiki.cache.DataCache;
 import com.wiki.dto.WikiDto;
 import com.wiki.mapper.WikiMapper;
 import com.wiki.model.Comment;
@@ -18,13 +19,24 @@ import java.util.List;
 public class WikiService {
     private final CommentRepository commentRepository;
     private final WikiRepository wikiRepository;
+    private final DataCache wikiCache;
 
     public List<Wiki> findAllWiki() {
+       // return wikiRepository.findAll();
+        Object wikiObject = wikiCache.get("all");
+        if(wikiObject instanceof List<?> list && list.get(0) instanceof Wiki && !list.isEmpty())
+            return (List<Wiki>) list;
+        wikiCache.put("all",wikiRepository.findAll());
         return wikiRepository.findAll();
     }
 
     public Wiki findByRequest(String requestWiki) {
-        return wikiRepository.findWikiByRequestWiki(requestWiki);
+    Object cacheObject=wikiCache.get(requestWiki);
+    if(cacheObject instanceof Wiki wikiObject)
+        return wikiObject;
+    Wiki wiki=wikiRepository.findWikiByRequestWiki(requestWiki);
+    wikiCache.put(requestWiki,wiki);
+        return wiki;
     }
 
     public void deleteWiki(String requestWiki) {
@@ -35,16 +47,21 @@ public class WikiService {
                 commentRepository.deleteAll(commentDelete);
             }
             wikiRepository.delete(wikiDelete);
+            wikiCache.remove(wikiDelete.getRequestWiki());
         }
     }
 
     public Wiki updateWiki(WikiDto wikidto) {
         wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki()).setAnswerWiki(wikidto.getAnswerWiki());
         wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki()).setCommentList(WikiMapper.toEntity(wikidto).getCommentList());
+        wikiCache.remove(wikidto.getRequestWiki());
+        wikiCache.put(wikidto.getRequestWiki(),WikiMapper.toEntity(wikidto));
         return wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki());
     }
 
     public Wiki saveWiki(final WikiDto wikiDto) {
-        return wikiRepository.save(WikiMapper.toEntity(wikiDto));
+        Wiki wiki=WikiMapper.toEntity(wikiDto);
+        wikiCache.put(wiki.getRequestWiki(),wiki);
+        return wikiRepository.save(wiki);
     }
 }
