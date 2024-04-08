@@ -5,6 +5,7 @@ import com.wiki.dto.WikiDto;
 import com.wiki.model.Wiki;
 import com.wiki.service.WikiService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,6 +39,11 @@ public class WikiController {
     @DeleteMapping("deleteWiki")
     public void deleteWiki(@RequestParam String request) {
         service.deleteWiki(request);
+    }
+
+    @GetMapping("findByRequestAndAuthor")
+    public Wiki findByRequestWikiAndAuthor(@Param("requestWiki") String requestWiki, @Param("author") String author) {
+        return service.findByRequestWikiAndAuthor(requestWiki, author);
     }
 }
 

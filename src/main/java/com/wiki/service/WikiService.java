@@ -9,6 +9,7 @@ import com.wiki.repository.CommentRepository;
 import com.wiki.repository.WikiRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,5 +64,19 @@ public class WikiService {
         Wiki wiki=WikiMapper.toEntity(wikiDto);
         wikiCache.put(wiki.getRequestWiki(),wiki);
         return wikiRepository.save(wiki);
+    }
+    public Wiki findByRequestWikiAndAuthor(@Param("requestWiki") String requestWiki, @Param("requestWiki") String author){
+        String cacheKey = requestWiki + "_" + author;
+        Object cachedObject = wikiCache.get(cacheKey);
+        if (cachedObject instanceof Wiki wiki) {
+            return (Wiki) wiki;
+        }
+        Wiki wiki = wikiRepository.findWikiByRequestWiki(requestWiki);
+        for (Comment comment:wiki.getCommentList())
+            if(comment.getAuthor()==author)
+            {
+                wikiCache.put(cacheKey,wiki);
+            }
+        return wiki;
     }
 }

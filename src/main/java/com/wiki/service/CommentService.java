@@ -61,7 +61,8 @@ public class CommentService {
     public Comment saveComment(CommentDto commentDto) {
         Comment comment=Objects.requireNonNull(CommentMapper.toEntity(commentDto));
         commentRepository.save(comment);
-        commentCahce.put(comment.getId().toString(),comment);
+        //commentCahce.put(comment.getId().toString(),comment);
+        commentCahce.put("all",comment);
         return comment;
     }
 }
