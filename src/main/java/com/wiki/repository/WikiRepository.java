@@ -16,6 +16,6 @@ public interface WikiRepository extends JpaRepository<Wiki, Long> {
     List<Wiki> findAll();
     Wiki findWikiByCommentListContains(Comment comment);
 
-    @Query("SELECT d FROM Wiki d INNER JOIN d.commentList c WHERE c.author = :author "+"AND d.requestWiki = :reqestWiki")
-    Wiki findByRequestWikiAndAuthor(@Param("requestWiki") String requestWiki, @Param("author") String author);
+    @Query("SELECT w FROM Wiki w JOIN w.commentList c WHERE c.author = :author "+"AND w.requestWiki = :requestWiki")
+    Wiki findWikiByRequestWikiAndAuthor(@Param("requestWiki") String requestWiki, @Param("author") String author);
 }

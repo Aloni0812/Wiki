@@ -71,12 +71,8 @@ public class WikiService {
         if (cachedObject instanceof Wiki wiki) {
             return (Wiki) wiki;
         }
-        Wiki wiki = wikiRepository.findWikiByRequestWiki(requestWiki);
-        for (Comment comment:wiki.getCommentList())
-            if(comment.getAuthor()==author)
-            {
+        Wiki wiki = wikiRepository.findWikiByRequestWikiAndAuthor(requestWiki, author);
                 wikiCache.put(cacheKey,wiki);
-            }
         return wiki;
     }
 }
