@@ -61,7 +61,7 @@ public class WikiService {
 
     public Wiki saveWiki(final WikiDto wikiDto) {
         Wiki wiki=WikiMapper.toEntity(wikiDto);
-        wikiCache.put(wiki.getRequestWiki(),wiki);
+        wikiCache.put("all",wiki);
         return wikiRepository.save(wiki);
     }
     public Wiki findByRequestWikiAndAuthor(@Param("requestWiki") String requestWiki, @Param("requestWiki") String author){
