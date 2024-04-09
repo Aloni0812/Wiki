@@ -9,6 +9,7 @@ import com.wiki.repository.CommentRepository;
 import com.wiki.repository.WikiRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,6 @@ public class CommentService {
     private final DataCache commentCahce;
 
     public List<Comment> findAllComment() {
-        //return commentRepository.findAll();
         Object cacheObject = commentCahce.get("all");
         if(cacheObject instanceof List<?> list && list.get(0) instanceof Comment && !list.isEmpty())
             return (List<Comment>) list;
@@ -54,14 +54,13 @@ public class CommentService {
     public Comment updateComment(CommentDto commentDto) {
       commentRepository.findCommentById(commentDto.getId()).setText(commentDto.getText());
       commentCahce.remove(commentDto.getId().toString());
-      commentCahce.put(commentDto.getId().toString(),commentDto);
+      commentCahce.put("all",CommentMapper.toEntity(commentDto));
       return commentRepository.findCommentById(commentDto.getId());
     }
 
     public Comment saveComment(CommentDto commentDto) {
         Comment comment=Objects.requireNonNull(CommentMapper.toEntity(commentDto));
         commentRepository.save(comment);
-        //commentCahce.put(comment.getId().toString(),comment);
         commentCahce.put("all",comment);
         return comment;
     }

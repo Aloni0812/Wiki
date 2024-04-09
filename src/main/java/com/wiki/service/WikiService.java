@@ -23,7 +23,6 @@ public class WikiService {
     private final DataCache wikiCache;
 
     public List<Wiki> findAllWiki() {
-       // return wikiRepository.findAll();
         Object wikiObject = wikiCache.get("all");
         if(wikiObject instanceof List<?> list && list.get(0) instanceof Wiki && !list.isEmpty())
             return (List<Wiki>) list;
@@ -69,7 +68,7 @@ public class WikiService {
         String cacheKey = requestWiki + "_" + author;
         Object cachedObject = wikiCache.get(cacheKey);
         if (cachedObject instanceof Wiki wiki) {
-            return (Wiki) wiki;
+            return wiki;
         }
         Wiki wiki = wikiRepository.findWikiByRequestWikiAndAuthor(requestWiki, author);
                 wikiCache.put(cacheKey,wiki);
