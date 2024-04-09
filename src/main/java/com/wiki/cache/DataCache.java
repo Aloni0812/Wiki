@@ -7,9 +7,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class DataCache {
+    private static final int MAX_SIZE = 100;
     private final Map<String,Object> heshmap= new ConcurrentHashMap<>();
 
     public void put(final String key, final Object toPut){
+        if(heshmap.size()>MAX_SIZE)
+            heshmap.remove(heshmap.keySet().iterator().next());
         heshmap.put(key, toPut);
     }
 
