@@ -14,9 +14,14 @@ JPA (Hibernate/Spring Data).
 ## Task№3(ready)
 1. Add an endpoint to the GET project (it should be useful) with the parameter(s). The data must be obtained from the database using a "custom" query (@Query) with the parameter(s) to the nested entity.
 2. Add the simplest cache in the form of an in-memory Map (as a separate bin).
+## Task№4(ready)
+1. Process 400 and 500 errors.
+2. Add logging of actions and errors (aspects).
+3. Connect Swagger & CheckStyle. To remove stylistic errors.
 ## Sonarcloud
 https://sonarcloud.io/summary/new_code?id=Aloni0812_Wiki2
 ## Technologies Used:
 1. Java
 2. Spring Boot/maven
 3. PostgreSQL
+4. Swagger
