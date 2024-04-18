@@ -24,3 +24,4 @@ https://sonarcloud.io/summary/new_code?id=Aloni0812_Wiki2
 1. Java
 2. Spring Boot/maven
 3. PostgreSQL
+4. Swagger
