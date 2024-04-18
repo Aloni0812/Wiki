@@ -1,30 +1,54 @@
 package com.wiki.cache;
 
-import org.springframework.stereotype.Component;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.stereotype.Component;
 
+
+/**
+ * The type Data cache.
+ */
 @Component
 public class DataCache {
-    private static final int MAX_SIZE = 100;
-    private final Map<String,Object> heshmap= new ConcurrentHashMap<>();
+  private static final int MAX_SIZE = 100;
+  private final Map<String, Object> hashmap = new ConcurrentHashMap<>();
 
-    public void put(final String key, final Object toPut){
-        if(heshmap.size()>MAX_SIZE)
-            heshmap.remove(heshmap.keySet().iterator().next());
-        heshmap.put(key, toPut);
+  /**
+   * Put.
+   *
+   * @param key   the key
+   * @param toPut the to put
+   */
+  public void put(final String key, final Object toPut) {
+    if (hashmap.size() > MAX_SIZE) {
+      hashmap.remove(hashmap.keySet().iterator().next());
     }
+    hashmap.put(key, toPut);
+  }
 
-    public Object get(final String key){
-        return heshmap.get(key);
-    }
+  /**
+   * Get object.
+   *
+   * @param key the key
+   * @return the object
+   */
+  public Object get(final String key) {
+    return hashmap.get(key);
+  }
 
-    public void clear() {
-        heshmap.clear();
-    }
+  /**
+   * Clear.
+   */
+  public void clear() {
+    hashmap.clear();
+  }
 
-    public void remove(String key){
-        heshmap.remove(key);
-    }
+  /**
+   * Remove.
+   *
+   * @param key the key
+   */
+  public void remove(String key) {
+    hashmap.remove(key);
+  }
 }

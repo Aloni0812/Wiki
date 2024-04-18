@@ -1,11 +1,23 @@
 package com.wiki.model;
 
-import jakarta.persistence.*;
-import lombok.*;
-
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
+/**
+ * The type Wiki.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,13 +25,16 @@ import java.util.List;
 @Table(name = "wiki")
 @Entity
 public class Wiki {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(unique = true)
-    private String requestWiki;
-    @Column(columnDefinition = "text")
-    private String answerWiki;
-    @OneToMany(cascade = CascadeType.ALL)
-    public List<Comment> commentList;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  @Column(unique = true)
+  private String requestWiki;
+  @Column(columnDefinition = "text")
+  private String answerWiki;
+  /**
+   * The Comment list.
+   */
+  @OneToMany(cascade = CascadeType.ALL)
+  public List<Comment> commentList;
 }
