@@ -3,6 +3,7 @@ package com.wiki.exceptions;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -10,9 +11,15 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 
 public class ErrorMessage {
- @JsonProperty("exception")
+  @JsonProperty("exception")
   private String message;
+  @JsonProperty("Error")
+  private String numberError;
+  @JsonProperty("Info")
+  private String infoError;
+
 }
