@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * The type Wiki mapper.
  */
-public class WikiMapper {
+public final class WikiMapper {
   private WikiMapper() {
   }
 

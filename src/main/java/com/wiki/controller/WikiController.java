@@ -42,7 +42,7 @@ public class WikiController {
    * @return the wiki
    */
   @PostMapping("saveWiki")
-  public Wiki saveWiki(@RequestBody WikiDto wikiDto) {
+  public Wiki saveWiki(@RequestBody final WikiDto wikiDto) {
     return service.saveWiki(wikiDto);
   }
 
@@ -53,7 +53,7 @@ public class WikiController {
    * @return the wiki
    */
   @GetMapping("findByRequest")
-  public Wiki findByRequest(@RequestParam String request) {
+  public Wiki findByRequest(@RequestParam final String request) {
     return service.findByRequest(request);
   }
 
@@ -64,7 +64,7 @@ public class WikiController {
    * @return the wiki
    */
   @PutMapping("updateWiki")
-  public Wiki updateWiki(@RequestBody WikiDto wikidto) {
+  public Wiki updateWiki(@RequestBody final WikiDto wikidto) {
     return service.updateWiki(wikidto);
   }
 
@@ -74,7 +74,7 @@ public class WikiController {
    * @param request the request
    */
   @DeleteMapping("deleteWiki")
-  public void deleteWiki(@RequestParam String request) {
+  public void deleteWiki(@RequestParam final String request) {
     service.deleteWiki(request);
   }
 
@@ -86,8 +86,9 @@ public class WikiController {
    * @return the wiki
    */
   @GetMapping("findByRequestAndAuthor")
-  public Wiki findByRequestWikiAndAuthor(@Param("requestWiki")
-                                           String requestWiki, @Param("author") String author) {
+  public Wiki findByRequestWikiAndAuthor(
+          @Param ("requestWiki") final String requestWiki,
+          @Param("author") final String author) {
     return service.findByRequestWikiAndAuthor(requestWiki, author);
   }
 }

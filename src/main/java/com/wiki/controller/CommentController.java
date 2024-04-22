@@ -40,7 +40,7 @@ public class CommentController {
    * @return the comment
    */
   @PostMapping("saveComment")
-  public Comment saveComment(@RequestBody CommentDto comment) {
+  public Comment saveComment(@RequestBody final CommentDto comment) {
     return service.saveComment(comment);
   }
 
@@ -51,7 +51,7 @@ public class CommentController {
    * @return the comment
    */
   @GetMapping("findById")
-  public Comment findById(@RequestParam Long id) {
+  public Comment findById(@RequestParam final Long id) {
     return service.findComment(id);
   }
 
@@ -62,7 +62,7 @@ public class CommentController {
    * @return the comment
    */
   @PutMapping("updateComment")
-  public Comment updateComment(@RequestBody CommentDto commentDto) {
+  public Comment updateComment(@RequestBody final CommentDto commentDto) {
     return service.updateComment(commentDto);
   }
 
@@ -72,7 +72,7 @@ public class CommentController {
    * @param id the id
    */
   @DeleteMapping("deleteCommment")
-  public void deleteComment(@RequestParam Long id) {
+  public void deleteComment(@RequestParam final Long id) {
     service.deleteComment(id);
   }
 

@@ -17,9 +17,9 @@ import lombok.Setter;
 public class ErrorMessage {
   @JsonProperty("exception")
   private String message;
-  @JsonProperty("Error")
+  @JsonProperty("error")
   private String numberError;
-  @JsonProperty("Info")
+  @JsonProperty("info")
   private String infoError;
 
 }

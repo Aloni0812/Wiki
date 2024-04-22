@@ -33,7 +33,8 @@ public class CommentService {
    */
   public List<Comment> findAllComment() {
     Object cacheObject = commentCache.get("all");
-    if (cacheObject instanceof List<?> list && list.get(0) instanceof Comment && !list.isEmpty()) {
+    if (cacheObject instanceof List<?> list && list.get(0)
+            instanceof Comment && !list.isEmpty()) {
       log.info("Loading data from the cache");
       return (List<Comment>) list;
     }
@@ -49,7 +50,7 @@ public class CommentService {
    * @param id the id
    * @return the comment
    */
-  public Comment findComment(Long id) {
+  public Comment findComment(final Long id) {
     Object cacheObject = commentCache.get(id.toString());
     if (cacheObject instanceof Comment commentObject) {
       return commentObject;
@@ -64,7 +65,7 @@ public class CommentService {
    *
    * @param id the id
    */
-  public void deleteComment(Long id) {
+  public void deleteComment(final Long id) {
     Comment comment = commentRepository.findCommentById(id);
     if (comment == null) {
       return;
@@ -87,8 +88,9 @@ public class CommentService {
    * @param commentDto the comment dto
    * @return the comment
    */
-  public Comment updateComment(CommentDto commentDto) {
-    commentRepository.findCommentById(commentDto.getId()).setText(commentDto.getText());
+  public Comment updateComment(final CommentDto commentDto) {
+    commentRepository.findCommentById(commentDto.getId())
+            .setText(commentDto.getText());
     commentCache.remove(commentDto.getId().toString());
     commentCache.put("all", CommentMapper.toEntity(commentDto));
     log.info("Updated comment with id {}", commentDto.getId());
@@ -101,8 +103,9 @@ public class CommentService {
    * @param commentDto the comment dto
    * @return the comment
    */
-  public Comment saveComment(CommentDto commentDto) {
-    Comment comment = Objects.requireNonNull(CommentMapper.toEntity(commentDto));
+  public Comment saveComment(final CommentDto commentDto) {
+    Comment comment = Objects.requireNonNull(CommentMapper
+            .toEntity(commentDto));
     commentRepository.save(comment);
     commentCache.put("all", comment);
     log.info("Saved comment with id {}", comment.getId());

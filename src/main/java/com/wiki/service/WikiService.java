@@ -35,7 +35,8 @@ public class WikiService {
    */
   public List<Wiki> findAllWiki() {
     Object wikiObject = wikiCache.get("all");
-    if (wikiObject instanceof List<?> list && list.get(0) instanceof Wiki && !list.isEmpty()) {
+    if (wikiObject instanceof List<?> list && list.get(0)
+            instanceof Wiki && !list.isEmpty()) {
       log.info("Loading data from the cache");
       return (List<Wiki>) list;
     }
@@ -51,7 +52,7 @@ public class WikiService {
    * @param requestWiki the request wiki
    * @return the wiki
    */
-  public Wiki findByRequest(String requestWiki) {
+  public Wiki findByRequest(final String requestWiki) {
     Object cacheObject = wikiCache.get(requestWiki);
     if (cacheObject instanceof Wiki wikiObject) {
       return wikiObject;
@@ -67,7 +68,7 @@ public class WikiService {
    *
    * @param requestWiki the request wiki
    */
-  public void deleteWiki(String requestWiki) {
+  public void deleteWiki(final String requestWiki) {
     Wiki wikiDelete = wikiRepository.findWikiByRequestWiki(requestWiki);
     if (wikiDelete != null) {
       List<Comment> commentDelete = wikiDelete.getCommentList();
@@ -86,7 +87,7 @@ public class WikiService {
    * @param wikidto the wikidto
    * @return the wiki
    */
-  public Wiki updateWiki(WikiDto wikidto) {
+  public Wiki updateWiki(final WikiDto wikidto) {
     wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki())
             .setAnswerWiki(wikidto.getAnswerWiki());
     wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki())
@@ -117,15 +118,17 @@ public class WikiService {
    * @param author      the author
    * @return the wiki
    */
-  public Wiki findByRequestWikiAndAuthor(@Param("requestWiki") String requestWiki,
-                                         @Param("requestWiki") String author) {
+  public Wiki findByRequestWikiAndAuthor(
+          @Param("requestWiki") final String requestWiki,
+          @Param("requestWiki") final String author) {
     String cacheKey = requestWiki + "_" + author;
     Object cachedObject = wikiCache.get(cacheKey);
     if (cachedObject instanceof Wiki wiki) {
       log.info("Found wiki by request: {} and author {}", requestWiki, author);
       return wiki;
     }
-    Wiki wiki = wikiRepository.findWikiByRequestWikiAndAuthor(requestWiki, author);
+    Wiki wiki = wikiRepository
+            .findWikiByRequestWikiAndAuthor(requestWiki, author);
     wikiCache.put(cacheKey, wiki);
     log.info("Found wiki by request: {} and author {}", requestWiki, author);
     return wiki;

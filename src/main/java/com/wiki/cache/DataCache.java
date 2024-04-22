@@ -48,7 +48,7 @@ public class DataCache {
    *
    * @param key the key
    */
-  public void remove(String key) {
+  public void remove(final String key) {
     hashmap.remove(key);
   }
 }

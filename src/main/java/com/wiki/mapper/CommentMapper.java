@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 /**
  * The type Comment mapper.
  */
-public class CommentMapper {
+public final class CommentMapper {
   private CommentMapper() {
   }
 

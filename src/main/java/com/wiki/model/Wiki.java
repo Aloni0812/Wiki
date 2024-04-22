@@ -36,5 +36,5 @@ public class Wiki {
    * The Comment list.
    */
   @OneToMany(cascade = CascadeType.ALL)
-  public List<Comment> commentList;
+  private List<Comment> commentList;
 }

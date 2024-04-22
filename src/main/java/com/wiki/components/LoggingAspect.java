@@ -30,7 +30,7 @@ public class LoggingAspect {
    * @param joinPoint the join point
    */
   @Before("serviceMethods()")
-  public void beforeLogServiceMethods(JoinPoint joinPoint) {
+  public void beforeLogServiceMethods(final JoinPoint joinPoint) {
     String className = joinPoint.getTarget().getClass().getName();
     String methodName = joinPoint.getSignature().getName();
     logger.info("Service method: class: {}, method: {}", className, methodName);
@@ -42,7 +42,7 @@ public class LoggingAspect {
    * @param joinPoint the join point
    */
   @After("serviceMethods()")
-  public void afterLogServiceMethods(JoinPoint joinPoint) {
+  public void afterLogServiceMethods(final JoinPoint joinPoint) {
     logger.info("Method {} complete", joinPoint.getSignature().getName());
   }
 
@@ -52,7 +52,7 @@ public class LoggingAspect {
    * @param joinPoint the join point
    */
   @Before("execution(* com.wiki.cache.DataCache.*(..))")
-  public void beforeLogCacheMethods(JoinPoint joinPoint) {
+  public void beforeLogCacheMethods(final JoinPoint joinPoint) {
     logger.info("Cache method: {}", joinPoint.getSignature().getName());
   }
 
@@ -62,7 +62,7 @@ public class LoggingAspect {
    * @param joinPoint the join point
    */
   @After("execution(* com.wiki.cache.DataCache.*(..))")
-  public void afterLogCacheMethods(JoinPoint joinPoint) {
+  public void afterLogCacheMethods(final JoinPoint joinPoint) {
     logger.info("Cache method compete: {}", joinPoint.getSignature().getName());
   }
 }
