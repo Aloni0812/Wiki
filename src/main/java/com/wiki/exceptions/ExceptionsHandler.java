@@ -21,13 +21,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Slf4j
 public class ExceptionsHandler extends ResponseEntityExceptionHandler {
 
+  final String  errorMsg = "error {}";
   @Override
   protected final ResponseEntity<Object>
        handleMethodArgumentNotValid(
                final MethodArgumentNotValidException ex,
                final HttpHeaders headers,
                final HttpStatusCode status, final WebRequest request) {
-    log.error("error {}", ex.getMessage());
+    log.error(errorMsg, ex.getMessage());
     ErrorMessage errorMessage = new ErrorMessage(ex.getMessage(),
             status.toString(), ex.getMessage());
     return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
@@ -40,7 +41,7 @@ public class ExceptionsHandler extends ResponseEntityExceptionHandler {
           final @NonNull HttpHeaders headers,
           final @NonNull HttpStatusCode status,
           final WebRequest request) {
-    log.error("error {}", ex.getStatusCode());
+    log.error(errorMsg, ex.getStatusCode());
     ErrorMessage errorMessage = new ErrorMessage(ex.getMessage(),
             HttpStatus.INTERNAL_SERVER_ERROR.toString(),
             ex.getStackTrace()[0].getMethodName());
@@ -50,7 +51,7 @@ public class ExceptionsHandler extends ResponseEntityExceptionHandler {
   @ExceptionHandler(Exception.class)
   protected final ResponseEntity<Object> handleAllExceptions(
           final Exception ex) {
-    log.error("error {}", ex.getMessage());
+    log.error(errorMsg, ex.getMessage());
     ErrorMessage errorMessage = new ErrorMessage(ex.getLocalizedMessage(),
             "500", ex.getStackTrace()[0].getMethodName());
     return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -60,7 +61,7 @@ public class ExceptionsHandler extends ResponseEntityExceptionHandler {
   protected final ResponseEntity<Object> handleHttpMessageNotReadable(
           final HttpMessageNotReadableException ex, final HttpHeaders headers,
           final HttpStatusCode status, final WebRequest request) {
-    log.error("error {}", ex.getMessage());
+    log.error(errorMsg, ex.getMessage());
     ErrorMessage msg = new ErrorMessage(
             ex.getLocalizedMessage(),
             HttpStatus.INTERNAL_SERVER_ERROR.toString(),
