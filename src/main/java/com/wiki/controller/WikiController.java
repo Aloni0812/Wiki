@@ -91,5 +91,6 @@ public class WikiController {
           @Param("author") final String author) {
     return service.findByRequestWikiAndAuthor(requestWiki, author);
   }
+
 }
 
