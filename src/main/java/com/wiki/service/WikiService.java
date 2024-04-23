@@ -15,9 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-/**
- * The type Wiki service.
- */
 @Service
 @Transactional
 @AllArgsConstructor
@@ -28,11 +25,6 @@ public class WikiService {
   private final WikiRepository wikiRepository;
   private final DataCache wikiCache;
 
-  /**
-   * Find all wiki list.
-   *
-   * @return the list
-   */
   public List<Wiki> findAllWiki() {
     Object wikiObject = wikiCache.get("all");
     if (wikiObject instanceof List<?> list && list.get(0)
@@ -46,12 +38,6 @@ public class WikiService {
     return wikiRepository.findAll();
   }
 
-  /**
-   * Find by request wiki.
-   *
-   * @param requestWiki the request wiki
-   * @return the wiki
-   */
   public Wiki findByRequest(final String requestWiki) {
     Object cacheObject = wikiCache.get(requestWiki);
     if (cacheObject instanceof Wiki wikiObject) {
@@ -63,11 +49,6 @@ public class WikiService {
     return wiki;
   }
 
-  /**
-   * Delete wiki.
-   *
-   * @param requestWiki the request wiki
-   */
   public void deleteWiki(final String requestWiki) {
     Wiki wikiDelete = wikiRepository.findWikiByRequestWiki(requestWiki);
     if (wikiDelete != null) {
@@ -81,12 +62,6 @@ public class WikiService {
     }
   }
 
-  /**
-   * Update wiki wiki.
-   *
-   * @param wikidto the wikidto
-   * @return the wiki
-   */
   public Wiki updateWiki(final WikiDto wikidto) {
     wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki())
             .setAnswerWiki(wikidto.getAnswerWiki());
@@ -98,12 +73,6 @@ public class WikiService {
     return wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki());
   }
 
-  /**
-   * Save wiki wiki.
-   *
-   * @param wikiDto the wiki dto
-   * @return the wiki
-   */
   public Wiki saveWiki(final WikiDto wikiDto) {
     Wiki wiki = WikiMapper.toEntity(wikiDto);
     wikiCache.put("all", wiki);
@@ -111,13 +80,6 @@ public class WikiService {
     return wikiRepository.save(wiki);
   }
 
-  /**
-   * Find by request wiki and author wiki.
-   *
-   * @param requestWiki the request wiki
-   * @param author      the author
-   * @return the wiki
-   */
   public Wiki findByRequestWikiAndAuthor(
           @Param("requestWiki") final String requestWiki,
           @Param("requestWiki") final String author) {

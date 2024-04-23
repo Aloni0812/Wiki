@@ -63,7 +63,7 @@ public class ExceptionsHandler extends ResponseEntityExceptionHandler {
     log.error("error not readable {}", ex.getMessage());
     ErrorMessage msg = new ErrorMessage(
             ex.getLocalizedMessage(),
-            HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+            HttpStatus.BAD_REQUEST.toString(),
             request.toString());
     return new ResponseEntity<>(msg, status);
   }

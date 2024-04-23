@@ -14,9 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-/**
- * The type Comment service.
- */
 @Service
 @Transactional
 @AllArgsConstructor
@@ -26,11 +23,6 @@ public class CommentService {
   private final WikiRepository wikiRepository;
   private final DataCache commentCache;
 
-  /**
-   * Find all comment list.
-   *
-   * @return the list
-   */
   public List<Comment> findAllComment() {
     Object cacheObject = commentCache.get("all");
     if (cacheObject instanceof List<?> list && list.get(0)
@@ -44,12 +36,6 @@ public class CommentService {
     return commentRepository.findAll();
   }
 
-  /**
-   * Find comment comment.
-   *
-   * @param id the id
-   * @return the comment
-   */
   public Comment findComment(final Long id) {
     Object cacheObject = commentCache.get(id.toString());
     if (cacheObject instanceof Comment commentObject) {
@@ -60,11 +46,6 @@ public class CommentService {
     return commentRepository.findCommentById(id);
   }
 
-  /**
-   * Delete comment.
-   *
-   * @param id the id
-   */
   public void deleteComment(final Long id) {
     Comment comment = commentRepository.findCommentById(id);
     if (comment == null) {
@@ -81,13 +62,6 @@ public class CommentService {
     commentCache.remove(id.toString());
   }
 
-
-  /**
-   * Update comment comment.
-   *
-   * @param commentDto the comment dto
-   * @return the comment
-   */
   public Comment updateComment(final CommentDto commentDto) {
     commentRepository.findCommentById(commentDto.getId())
             .setText(commentDto.getText());
@@ -96,13 +70,6 @@ public class CommentService {
     log.info("Updated comment with id {}", commentDto.getId());
     return commentRepository.findCommentById(commentDto.getId());
   }
-
-  /**
-   * Save comment comment.
-   *
-   * @param commentDto the comment dto
-   * @return the comment
-   */
   public Comment saveComment(final CommentDto commentDto) {
     Comment comment = Objects.requireNonNull(CommentMapper
             .toEntity(commentDto));
