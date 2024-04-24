@@ -112,7 +112,6 @@ public class WikiService {
     for (WikiDto wikiDto : wikiDtoList) {
       returnList.add(WikiMapper.toEntity(wikiDto));
     }
-   // wikiRepository.saveAll(wikisListToSave);
     return wikiRepository.saveAll(wikisListToSave);
   }
 }

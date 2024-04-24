@@ -6,6 +6,7 @@ import com.wiki.model.Comment;
 import com.wiki.model.Wiki;
 import com.wiki.repository.CommentRepository;
 import com.wiki.repository.WikiRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -14,9 +15,9 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 class WikiServiceTest {
   private WikiService wikiService;
 
@@ -150,5 +151,24 @@ class WikiServiceTest {
     Wiki result = wikiService.findByRequestWikiAndAuthor(requestWiki, author);
     assertEquals(wiki, result);
     verify(wikiCache).put(cacheKey, wiki);
+  }
+
+  @Test
+  public void testBulkSaveWiki() {
+    ArrayList<WikiDto> wikiDtoList = new ArrayList<>();
+    WikiDto wikiDto1 = new WikiDto();
+    wikiDto1.setRequestWiki("Test 1");
+    WikiDto wikiDto2 = new WikiDto();
+    wikiDto2.setRequestWiki("Test 2");
+    wikiDtoList.add(wikiDto1);
+    wikiDtoList.add(wikiDto2);
+    Wiki existingWiki = new Wiki();
+    existingWiki.setRequestWiki("Test 1");
+    when(wikiRepository.findWikiByRequestWiki(eq("Test 1"))).thenReturn(existingWiki);
+    List<Wiki> result = wikiService.bulkSaveWiki(wikiDtoList);
+    verify(wikiRepository, times(1)).findWikiByRequestWiki(eq("Test 1"));
+    verify(wikiRepository, times(1)).saveAll(anyList());
+    verify(wikiCache, times(1)).remove(eq("Test 1"));
+    verify(wikiCache, times(1)).put(eq("all"), eq(existingWiki));
   }
 }

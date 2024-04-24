@@ -11,13 +11,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -104,5 +107,19 @@ public class WikiControllerTest {
                     .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andReturn();
+  }
+
+  @Test
+  public void testBulkSaveWiki() throws Exception {
+    ArrayList<WikiDto> wikisList = new ArrayList<>();
+    List<Wiki> savedWikiList = new ArrayList<>();
+    when(wikiService.bulkSaveWiki(wikisList)).thenReturn(savedWikiList);
+    mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/Wiki/bulkSave")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content("[{\"requestWiki\":\"Test 1\",\"answerWiki\"" +
+                            ":\"Test 1\"},{\"requestWiki\":\"Test 2\"," +
+                            "\"answerWiki\":\"Test 2\"}]")
+                    .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isOk());
   }
 }
