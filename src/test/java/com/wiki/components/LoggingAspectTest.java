@@ -6,9 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.slf4j.Logger;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class LoggingAspectTest {
