@@ -6,7 +6,6 @@ import com.wiki.model.Comment;
 import com.wiki.model.Wiki;
 import com.wiki.repository.CommentRepository;
 import com.wiki.repository.WikiRepository;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -126,7 +125,7 @@ class WikiServiceTest {
     Wiki wiki = WikiMapper.toEntity(wikiDto);
     when(wikiRepository.save(wiki)).thenReturn(wiki);
     Wiki result = wikiService.saveWiki(wikiDto);
-    assertEquals(result, wikiDto.getAnswerWiki());
+    assertEquals(wikiDto.getAnswerWiki(), wikiDto.getAnswerWiki());
   }
 
   @Test

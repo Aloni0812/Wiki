@@ -14,10 +14,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-/**
- * The type Wiki.
- */
 @Getter
 @Setter
 @AllArgsConstructor

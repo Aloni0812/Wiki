@@ -95,7 +95,7 @@ public class WikiService {
     log.info("Found wiki by request: {} and author {}", requestWiki, author);
     return wiki;
   }
-  public List<Wiki> bulkSaveWiki(ArrayList<WikiDto> wikiDtoList) {
+  public List<Wiki> bulkSaveWiki(List<WikiDto> wikiDtoList) {
     List<Wiki> wikisListToSave = new ArrayList<>();
     for (WikiDto wikiDto : wikiDtoList) {
       Wiki wikiFind = wikiRepository.findWikiByRequestWiki(wikiDto.getRequestWiki());
