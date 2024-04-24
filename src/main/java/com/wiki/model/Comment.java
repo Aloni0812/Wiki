@@ -10,9 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * The type Comment.
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
