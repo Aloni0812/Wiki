@@ -4,19 +4,9 @@ import com.wiki.dto.CommentDto;
 import com.wiki.model.Comment;
 import java.time.LocalDateTime;
 
-/**
- * The type Comment mapper.
- */
 public final class CommentMapper {
   private CommentMapper() {
   }
-
-  /**
-   * To dto comment dto.
-   *
-   * @param comment the comment
-   * @return the comment dto
-   */
   public static CommentDto toDto(final Comment comment) {
     if (comment != null) {
       CommentDto commentDto = new CommentDto();
@@ -27,13 +17,6 @@ public final class CommentMapper {
     }
     return null;
   }
-
-  /**
-   * To entity comment.
-   *
-   * @param commentDto the comment dto
-   * @return the comment
-   */
   public static Comment toEntity(final CommentDto commentDto) {
     if (commentDto != null) {
       Comment comment = new Comment();

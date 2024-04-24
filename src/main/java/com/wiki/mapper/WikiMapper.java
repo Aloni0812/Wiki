@@ -7,19 +7,9 @@ import com.wiki.model.Wiki;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The type Wiki mapper.
- */
 public final class WikiMapper {
   private WikiMapper() {
   }
-
-  /**
-   * To dto wiki dto.
-   *
-   * @param wiki the wiki
-   * @return the wiki dto
-   */
   public static WikiDto toDto(final Wiki wiki) {
     if (wiki != null) {
       WikiDto wikiDto = new WikiDto();
@@ -30,12 +20,6 @@ public final class WikiMapper {
     return null;
   }
 
-  /**
-   * To entity wiki.
-   *
-   * @param wikiDto the wiki dto
-   * @return the wiki
-   */
   public static Wiki toEntity(final WikiDto wikiDto) {
     if (wikiDto != null) {
       Wiki wiki = new Wiki();
