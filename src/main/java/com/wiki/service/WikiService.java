@@ -8,6 +8,8 @@ import com.wiki.model.Wiki;
 import com.wiki.repository.CommentRepository;
 import com.wiki.repository.WikiRepository;
 import jakarta.transaction.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -92,5 +94,25 @@ public class WikiService {
     wikiCache.put(cacheKey, wiki);
     log.info("Found wiki by request: {} and author {}", requestWiki, author);
     return wiki;
+  }
+  public List<Wiki> bulkSaveWiki(ArrayList<WikiDto> wikiDtoList) {
+    List<Wiki> wikisListToSave = new ArrayList<>();
+    for (WikiDto wikiDto : wikiDtoList) {
+      Wiki wikiFind = wikiRepository.findWikiByRequestWiki(wikiDto.getRequestWiki());
+      if (wikiFind != null) {
+        wikiCache.remove(wikiFind.getRequestWiki());
+        wikiCache.put("all", wikiFind);
+
+      } else {
+        wikiCache.put("all", wikiDto);
+        wikisListToSave.add(WikiMapper.toEntity(wikiDto));
+      }
+    }
+    List<Wiki> returnList= new ArrayList<>();
+    for (WikiDto wikiDto : wikiDtoList) {
+      returnList.add(WikiMapper.toEntity(wikiDto));
+    }
+   // wikiRepository.saveAll(wikisListToSave);
+    return wikiRepository.saveAll(wikisListToSave);
   }
 }

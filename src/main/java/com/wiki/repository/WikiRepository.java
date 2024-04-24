@@ -17,4 +17,7 @@ public interface WikiRepository extends JpaRepository<Wiki, Long> {
   @Query("SELECT w FROM Wiki w JOIN w.commentList c WHERE c.author = :author " + "AND w.requestWiki = :requestWiki")
  Wiki findWikiByRequestWikiAndAuthor(@Param("requestWiki") String requestWiki,
  @Param("author") String author);
+
+  @Override
+  <S extends Wiki> List<S> saveAll(Iterable<S> entities);
 }

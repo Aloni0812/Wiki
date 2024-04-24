@@ -2,8 +2,11 @@ package com.wiki.controller;
 
 
 import com.wiki.dto.WikiDto;
+import com.wiki.model.Comment;
 import com.wiki.model.Wiki;
 import com.wiki.service.WikiService;
+
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.data.repository.query.Param;
@@ -52,6 +55,11 @@ public class WikiController {
           @Param ("requestWiki") final String requestWiki,
           @Param("author") final String author) {
     return service.findByRequestWikiAndAuthor(requestWiki, author);
+  }
+
+  @PostMapping("/bulkSave")
+  public List<Wiki> bulkSaveWiki(@RequestBody ArrayList<WikiDto> wikisList) {
+    return service.bulkSaveWiki(wikisList);
   }
 
 }
