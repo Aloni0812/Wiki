@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public class CommentMapperTest {
   @Test
-  public void testToDto() {
+  void testToDto() {
     // Arrange
     String author = "Test";
     String text = "txt";
@@ -26,13 +26,13 @@ public class CommentMapperTest {
   }
 
   @Test
-  public void testToDto_NullComment() {
+  void testToDto_NullComment() {
     CommentDto commentDto = CommentMapper.toDto(null);
     Assertions.assertNull(commentDto);
   }
 
   @Test
-  public void testToEntity() {
+  void testToEntity() {
     String author = "Test";
     String text = "Test txt";
     CommentDto commentDto = new CommentDto();
@@ -46,7 +46,7 @@ public class CommentMapperTest {
   }
 
   @Test
-  public void testToEntity_NullCommentDto() {
+  void testToEntity_NullCommentDto() {
     Comment comment = CommentMapper.toEntity(null);
     Assertions.assertNull(comment);
   }

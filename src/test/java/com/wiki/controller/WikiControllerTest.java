@@ -31,15 +31,14 @@ public class WikiControllerTest {
   private WikiService wikiService;
 
   @BeforeEach
-  public void setup() {
+  void setup() {
     MockitoAnnotations.initMocks(this);
     WikiController wikiController = new WikiController(wikiService);
     mockMvc = MockMvcBuilders.standaloneSetup(wikiController).build();
   }
 
   @Test
-  public void testFindAllWiki() throws Exception {
-    // Arrange
+  void testFindAllWiki() throws Exception {
     Wiki wiki1 = new Wiki();
     Wiki wiki2 = new Wiki();
     List<Wiki> wikiList = Arrays.asList(wiki1, wiki2);
@@ -52,7 +51,7 @@ public class WikiControllerTest {
   }
 
   @Test
-  public void testSaveWiki() throws Exception {
+  void testSaveWiki() throws Exception {
     Wiki savedWiki = new Wiki();
     when(wikiService.saveWiki(any(WikiDto.class))).thenReturn(savedWiki);
     MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/Wiki/saveWiki")
@@ -65,7 +64,7 @@ public class WikiControllerTest {
   }
 
   @Test
-  public void testFindByRequest() throws Exception {
+  void testFindByRequest() throws Exception {
     String request = "Test Request";
     Wiki wiki = new Wiki();
     when(wikiService.findByRequest(request)).thenReturn(wiki);
@@ -76,7 +75,7 @@ public class WikiControllerTest {
   }
 
   @Test
-  public void testUpdateWiki() throws Exception {
+  void testUpdateWiki() throws Exception {
     Wiki updatedWiki = new Wiki();
     when(wikiService.updateWiki(any(WikiDto.class))).thenReturn(updatedWiki);
     MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/Wiki/updateWiki")
@@ -87,7 +86,7 @@ public class WikiControllerTest {
   }
 
   @Test
-  public void testDeleteWiki() throws Exception {
+  void testDeleteWiki() throws Exception {
     String request = "Test Request";
     mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/Wiki/deleteWiki?request=Test Request")
                     .contentType(MediaType.APPLICATION_JSON))
@@ -96,7 +95,7 @@ public class WikiControllerTest {
   }
 
   @Test
-  public void testFindByRequestWikiAndAuthor() throws Exception {
+  void testFindByRequestWikiAndAuthor() throws Exception {
     String requestWiki = "Test Request";
     String author = "Author";
     Wiki wiki = new Wiki();
@@ -110,7 +109,7 @@ public class WikiControllerTest {
   }
 
   @Test
-  public void testBulkSaveWiki() throws Exception {
+  void testBulkSaveWiki() throws Exception {
     ArrayList<WikiDto> wikisList = new ArrayList<>();
     List<Wiki> savedWikiList = new ArrayList<>();
     when(wikiService.bulkSaveWiki(wikisList)).thenReturn(savedWikiList);

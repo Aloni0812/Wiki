@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class CommentTest {
   @Test
-  public void testCommentConstructor() {
+  void testCommentConstructor() {
     Long id = 1L;
     String author = "Sasha";
     String text = "Test";
@@ -22,7 +22,7 @@ public class CommentTest {
   }
 
   @Test
-  public void testCommentGettersAndSetters() {
+  void testCommentGettersAndSetters() {
     Comment comment = new Comment();
     Long id = 1L;
     String author = "Sasha";

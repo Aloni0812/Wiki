@@ -30,13 +30,13 @@ class WikiServiceTest {
   private DataCache wikiCache;
 
   @BeforeEach
-  public void setup() {
+  void setup() {
     MockitoAnnotations.initMocks(this);
     wikiService = new WikiService(commentRepository, wikiRepository, wikiCache);
   }
 
   @Test
-  public void testFindAllWiki_FromCache() {
+   void testFindAllWiki_FromCache() {
     List<Wiki> wikiList = new ArrayList<>();
     wikiList.add(new Wiki());
     when(wikiCache.get("all")).thenReturn(wikiList);
@@ -47,8 +47,7 @@ class WikiServiceTest {
   }
 
   @Test
-  public void testFindAllWiki_FromDatabase() {
-    // Arrange
+  void testFindAllWiki_FromDatabase() {
     List<Wiki> wikiList = new ArrayList<>();
     wikiList.add(new Wiki());
     when(wikiRepository.findAll()).thenReturn(wikiList);
@@ -61,7 +60,7 @@ class WikiServiceTest {
   }
 
   @Test
-  public void testFindByRequest_FromCache() {
+  void testFindByRequest_FromCache() {
     String requestWiki = "test";
     Wiki wiki = new Wiki();
     when(wikiCache.get(requestWiki)).thenReturn(wiki);
@@ -72,7 +71,7 @@ class WikiServiceTest {
   }
 
   @Test
-  public void testFindByRequest_FromDatabase() {
+  void testFindByRequest_FromDatabase() {
     String requestWiki = "test";
     Wiki wiki = new Wiki();
     when(wikiRepository.findWikiByRequestWiki(requestWiki)).thenReturn(wiki);
@@ -83,7 +82,7 @@ class WikiServiceTest {
   }
 
   @Test
-  public void testDeleteWiki_WikiNotFound() {
+  void testDeleteWiki_WikiNotFound() {
     String requestWiki = "test";
     when(wikiRepository.findWikiByRequestWiki(requestWiki)).thenReturn(null);
     wikiService.deleteWiki(requestWiki);
@@ -91,7 +90,7 @@ class WikiServiceTest {
   }
 
   @Test
-  public void testDeleteWiki_WikiFound() {
+  void testDeleteWiki_WikiFound() {
     String requestWiki = "test";
     Wiki wiki = new Wiki();
     List<Comment> commentList = new ArrayList<>();
@@ -102,11 +101,10 @@ class WikiServiceTest {
     verify(wikiRepository).findWikiByRequestWiki(requestWiki);
     verify(commentRepository).deleteAll(commentList);
     verify(wikiRepository).delete(wiki);
-//    verify(wikiCache).remove(requestWiki);
   }
 
   @Test
-  public void testUpdateWiki() {
+  void testUpdateWiki() {
     String requestWiki = "test";
     String updatedAnswer = "Updated";
     WikiDto wikiDto = new WikiDto();
@@ -120,7 +118,7 @@ class WikiServiceTest {
   }
 
   @Test
-  public void testSaveWiki() {
+  void testSaveWiki() {
     WikiDto wikiDto = new WikiDto();
     Wiki wiki = WikiMapper.toEntity(wikiDto);
     when(wikiRepository.save(wiki)).thenReturn(wiki);
@@ -129,7 +127,7 @@ class WikiServiceTest {
   }
 
   @Test
-  public void testFindByRequestWikiAndAuthor_FromCache() {
+  void testFindByRequestWikiAndAuthor_FromCache() {
     String requestWiki = "test";
     String author = "Sasha";
     String cacheKey = requestWiki + "_" + author;
@@ -140,7 +138,7 @@ class WikiServiceTest {
   }
 
   @Test
-  public void testFindByRequestWikiAndAuthor_FromDatabase() {
+  void testFindByRequestWikiAndAuthor_FromDatabase() {
     String requestWiki = "test";
     String author = "Sasha";
     String cacheKey = requestWiki + "_" + author;
@@ -153,7 +151,7 @@ class WikiServiceTest {
   }
 
   @Test
-  public void testBulkSaveWiki() {
+  void testBulkSaveWiki() {
     ArrayList<WikiDto> wikiDtoList = new ArrayList<>();
     WikiDto wikiDto1 = new WikiDto();
     wikiDto1.setRequestWiki("Test 1");

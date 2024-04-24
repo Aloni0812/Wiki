@@ -32,13 +32,13 @@ class CommentServiceTest {
   private DataCache commentCache;
 
   @BeforeEach
-  public void setup() {
+  void setup() {
     MockitoAnnotations.initMocks(this);
     commentService = new CommentService(commentRepository, wikiRepository, commentCache);
   }
 
   @Test
-  public void testFindAllComment_FromCache() {
+  void testFindAllComment_FromCache() {
     List<Comment> commentList = new ArrayList<>();
     commentList.add(new Comment());
     when(commentCache.get("all")).thenReturn(commentList);
@@ -47,7 +47,7 @@ class CommentServiceTest {
   }
 
   @Test
-  public void testFindAllComment_FromDatabase() {
+  void testFindAllComment_FromDatabase() {
     List<Comment> commentList = new ArrayList<>();
     commentList.add(new Comment());
     when(commentRepository.findAll()).thenReturn(commentList);
@@ -58,7 +58,7 @@ class CommentServiceTest {
   }
 
   @Test
-  public void testFindComment_FromCache() {
+  void testFindComment_FromCache() {
     Long commentId = 1L;
     Comment comment = new Comment();
     when(commentCache.get(commentId.toString())).thenReturn(comment);
@@ -67,7 +67,7 @@ class CommentServiceTest {
   }
 
   @Test
-  public void testFindComment_FromDatabase() {
+  void testFindComment_FromDatabase() {
     Long commentId = 1L;
     Comment comment = new Comment();
     when(commentRepository.findCommentById(commentId)).thenReturn(comment);
@@ -80,7 +80,7 @@ class CommentServiceTest {
   }
 
   @Test
-  public void testDeleteComment_CommentFound() {
+  void testDeleteComment_CommentFound() {
     Long commentId = 1L;
     Comment comment = new Comment();
     List<Comment> commentList = new ArrayList<Comment>();
@@ -89,9 +89,7 @@ class CommentServiceTest {
     wiki.setCommentList(commentList);
     when(commentRepository.findCommentById(commentId)).thenReturn(comment);
     when(wikiRepository.findWikiByCommentListContains(comment)).thenReturn(wiki);
-
     commentService.deleteComment(commentId);
-
     verify(wikiRepository).findWikiByCommentListContains(comment);
     assertTrue(wiki.getCommentList().isEmpty());
     verify(commentRepository).deleteById(commentId);
@@ -99,7 +97,7 @@ class CommentServiceTest {
   }
 
   @Test
-  public void testUpdateComment() {
+  void testUpdateComment() {
     Long commentId = 1L;
     String updatedText = "Updated Text";
     CommentDto commentDto = new CommentDto();
@@ -117,7 +115,7 @@ class CommentServiceTest {
   }
 
   @Test
-  public void testSaveComment() {
+   void testSaveComment() {
     CommentDto commentDto = new CommentDto();
     Comment comment = CommentMapper.toEntity(commentDto);
     when(commentRepository.save(comment)).thenReturn(comment);

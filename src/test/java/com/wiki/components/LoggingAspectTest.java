@@ -19,13 +19,13 @@ public class LoggingAspectTest {
   private LoggingAspect loggingAspect;
 
   @BeforeEach
-  public void setup() {
+  void setup() {
     MockitoAnnotations.initMocks(this);
     loggingAspect = new LoggingAspect();
   }
 
   @Test
-  public void testAfterLogServiceMethods() {
+  void testAfterLogServiceMethods() {
     when(joinPoint.getSignature()).thenReturn(signature);
     when(signature.getName()).thenReturn("someMethod");
 
@@ -33,7 +33,7 @@ public class LoggingAspectTest {
   }
 
   @Test
-  public void testBeforeLogCacheMethods() {
+  void testBeforeLogCacheMethods() {
     when(joinPoint.getSignature()).thenReturn(signature);
     when(signature.getName()).thenReturn("cacheMethod");
 
@@ -41,7 +41,7 @@ public class LoggingAspectTest {
   }
 
   @Test
-  public void testAfterLogCacheMethods() {
+  void testAfterLogCacheMethods() {
     when(joinPoint.getSignature()).thenReturn(signature);
     when(signature.getName()).thenReturn("cacheMethod");
 

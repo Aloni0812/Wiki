@@ -9,7 +9,7 @@ import java.util.List;
 
 public class WikiDtoTest {
   @Test
-  public void testGetterAndSetter() {
+  void testGetterAndSetter() {
     String requestWiki = "Cats";
     String answerWiki = "cat is not dog";
     WikiDto wikiDto = new WikiDto();
@@ -20,7 +20,7 @@ public class WikiDtoTest {
   }
 
   @Test
-  public void testNoArgsConstructor() {
+  void testNoArgsConstructor() {
     WikiDto wikiDto = new WikiDto();
     Assertions.assertNull(wikiDto.getRequestWiki());
     Assertions.assertNull(wikiDto.getAnswerWiki());
@@ -28,7 +28,7 @@ public class WikiDtoTest {
   }
 
   @Test
-  public void testAllArgsConstructor() {
+  void testAllArgsConstructor() {
     String requestWiki = "Cats";
     String answerWiki = "Cat is not dog";
     List<CommentDto> commentDtoList = Arrays.asList(new CommentDto( 1l,"John", "Great article!", LocalDateTime.now()));

@@ -18,13 +18,13 @@ public class ExceptionsHandlerTest {
   private WebRequest mockWebRequest;
 
   @BeforeEach
-  public void setup() {
+  void setup() {
     exceptionsHandler = new ExceptionsHandler();
     mockWebRequest = mock(WebRequest.class);
   }
 
   @Test
-  public void testHandleHttpRequestMethodNotSupported() {
+  void testHandleHttpRequestMethodNotSupported() {
     HttpRequestMethodNotSupportedException ex = new HttpRequestMethodNotSupportedException("GET");
     HttpHeaders headers = new HttpHeaders();
     HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -36,7 +36,7 @@ public class ExceptionsHandlerTest {
   }
 
   @Test
-  public void testHandleAllExceptions() {
+  void testHandleAllExceptions() {
     Exception ex = new Exception("Test exception");
     ResponseEntity<Object> response = exceptionsHandler.handleAllExceptions(ex);
     assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
@@ -47,7 +47,7 @@ public class ExceptionsHandlerTest {
   }
 
   @Test
-  public void testHandleHttpMessageNotReadable() {
+  void testHandleHttpMessageNotReadable() {
     HttpMessageNotReadableException ex = new HttpMessageNotReadableException("Message not readable");
     HttpHeaders headers = new HttpHeaders();
     HttpStatus status = HttpStatus.BAD_REQUEST;

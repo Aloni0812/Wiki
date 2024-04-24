@@ -12,7 +12,7 @@ import java.util.List;
 
 public class WikiMapperTest {
   @Test
-  public void testToDto() {
+  void testToDto() {
     String requestWiki = "Cats";
     String answerWiki = "Cat is not dog";
     Wiki wiki = new Wiki();
@@ -24,13 +24,13 @@ public class WikiMapperTest {
     Assertions.assertEquals(answerWiki, wikiDto.getAnswerWiki());
   }
   @Test
-  public void testToDto_NullWiki() {
+  void testToDto_NullWiki() {
     WikiDto wikiDto = WikiMapper.toDto(null);
     Assertions.assertNull(wikiDto);
   }
 
   @Test
-  public void testToEntity() {
+  void testToEntity() {
     String requestWiki = "Cats";
     String answerWiki = "Cat is not dog";
     List<CommentDto> commentDtoList = new ArrayList<>();
@@ -54,7 +54,7 @@ public class WikiMapperTest {
   }
 
   @Test
-  public void testToEntity_NullWikiDto() {
+  void testToEntity_NullWikiDto() {
     Wiki wiki = WikiMapper.toEntity(null);
     Assertions.assertNull(wiki);
   }

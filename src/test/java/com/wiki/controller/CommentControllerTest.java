@@ -26,14 +26,14 @@ public class CommentControllerTest {
   @Mock
   private CommentService commentService;
   @BeforeEach
-  public void setup() {
+  void setup() {
     MockitoAnnotations.openMocks(this);
     CommentController commentController = new CommentController(commentService);
     mockMvc = MockMvcBuilders.standaloneSetup(commentController).build();
   }
 
   @Test
-  public void testFindAllComment() throws Exception {
+  void testFindAllComment() throws Exception {
     List<Comment> commentList = new ArrayList<>();
     commentList.add(new Comment());
     commentList.add(new Comment());
@@ -49,7 +49,7 @@ public class CommentControllerTest {
   }
 
   @Test
-  public void testSaveComment() throws Exception {
+  void testSaveComment() throws Exception {
     // Arrange
     CommentDto commentDto = new CommentDto();
     commentDto.setAuthor("Cats");
@@ -69,7 +69,7 @@ public class CommentControllerTest {
   }
 
   @Test
-  public void testFindById() throws Exception {
+  void testFindById() throws Exception {
     Long commentId = 1L;
     Comment comment = new Comment();
     comment.setId(commentId);
@@ -85,7 +85,7 @@ public class CommentControllerTest {
   }
 
   @Test
-  public void testUpdateComment() throws Exception {
+  void testUpdateComment() throws Exception {
     CommentDto commentDto = new CommentDto();
     commentDto.setAuthor("Cats");
     commentDto.setText("Test");

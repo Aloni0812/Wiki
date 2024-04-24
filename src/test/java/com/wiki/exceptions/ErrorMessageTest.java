@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ErrorMessageTest {
 
   @Test
-  public void testErrorMessageConstructor() {
+  void testErrorMessageConstructor() {
     String message = "Exception";
     String numberError = "404";
     String infoError = "Bad req";
@@ -17,7 +17,7 @@ public class ErrorMessageTest {
   }
 
   @Test
-  public void testErrorMessageJsonSerialization() throws Exception {
+  void testErrorMessageJsonSerialization() throws Exception {
     String message = "Exception";
     String numberError = "404";
     String infoError = "Bad req";
@@ -29,7 +29,7 @@ public class ErrorMessageTest {
   }
 
   @Test
-  public void testErrorMessageJsonDeserialization() throws Exception {
+  void testErrorMessageJsonDeserialization() throws Exception {
     String json = "{\"exception\":\"Exception\",\"error\":\"404\",\"info\":\"Bad req\"}";
     ObjectMapper objectMapper = new ObjectMapper();
     ErrorMessage errorMessage = objectMapper.readValue(json, ErrorMessage.class);

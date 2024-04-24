@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class WikiTest {
   @Test
-  public void testWikiConstructor() {
+  void testWikiConstructor() {
     Long id = 1L;
     String requestWiki = "Cats";
     String answerWiki = "Test";
@@ -23,7 +23,7 @@ public class WikiTest {
   }
 
   @Test
-  public void testWikiGettersAndSetters() {
+  void testWikiGettersAndSetters() {
     Wiki wiki = new Wiki();
     Long id = 1L;
     String requestWiki = "Cats";

@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public class CommentDtoTest {
   @Test
-  public void testGetterAndSetter() {
+  void testGetterAndSetter() {
     Long id = 1L;
     String author = "John";
     String text = "Hello World";
@@ -24,7 +24,7 @@ public class CommentDtoTest {
   }
 
   @Test
-  public void testNoArgsConstructor() {
+  void testNoArgsConstructor() {
     CommentDto commentDto = new CommentDto();
     Assertions.assertNull(commentDto.getId());
     Assertions.assertNull(commentDto.getAuthor());
@@ -33,7 +33,7 @@ public class CommentDtoTest {
   }
 
   @Test
-  public void testAllArgsConstructor() {
+  void testAllArgsConstructor() {
     Long id = 1L;
     String author = "John";
     String text = "Hello World";
