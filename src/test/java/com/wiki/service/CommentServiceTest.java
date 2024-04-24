@@ -1,4 +1,5 @@
 package com.wiki.service;
 
-public class CommentServiceTest {
+class CommentServiceTest {
+
 }

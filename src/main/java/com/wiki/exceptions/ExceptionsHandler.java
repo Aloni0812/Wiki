@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-/**
- * The type Exceptions handler.
- */
 @ControllerAdvice
 @Slf4j
 public class ExceptionsHandler extends ResponseEntityExceptionHandler {

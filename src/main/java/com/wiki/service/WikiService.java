@@ -2,7 +2,6 @@ package com.wiki.service;
 
 import com.wiki.cache.DataCache;
 import com.wiki.dto.WikiDto;
-import com.wiki.exceptions.ExceptionsHandler;
 import com.wiki.mapper.WikiMapper;
 import com.wiki.model.Comment;
 import com.wiki.model.Wiki;
@@ -20,9 +19,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Slf4j
 public class WikiService {
-  private final ExceptionsHandler exceptionsHandler;
   private final CommentRepository commentRepository;
-  private final WikiRepository wikiRepository;
+  private WikiRepository wikiRepository;
   private final DataCache wikiCache;
 
   public List<Wiki> findAllWiki() {
@@ -82,7 +80,7 @@ public class WikiService {
 
   public Wiki findByRequestWikiAndAuthor(
           @Param("requestWiki") final String requestWiki,
-          @Param("requestWiki") final String author) {
+          @Param("author") final String author) {
     String cacheKey = requestWiki + "_" + author;
     Object cachedObject = wikiCache.get(cacheKey);
     if (cachedObject instanceof Wiki wiki) {
