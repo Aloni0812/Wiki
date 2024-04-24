@@ -161,11 +161,11 @@ class WikiServiceTest {
     wikiDtoList.add(wikiDto2);
     Wiki existingWiki = new Wiki();
     existingWiki.setRequestWiki("Test 1");
-    when(wikiRepository.findWikiByRequestWiki(eq("Test 1"))).thenReturn(existingWiki);
+    when(wikiRepository.findWikiByRequestWiki("Test 1")).thenReturn(existingWiki);
     List<Wiki> result = wikiService.bulkSaveWiki(wikiDtoList);
-    verify(wikiRepository, times(1)).findWikiByRequestWiki(eq("Test 1"));
+    verify(wikiRepository, times(1)).findWikiByRequestWiki("Test 1");
     verify(wikiRepository, times(1)).saveAll(anyList());
-    verify(wikiCache, times(1)).remove(eq("Test 1"));
-    verify(wikiCache, times(1)).put(eq("all"), eq(existingWiki));
+    verify(wikiCache, times(1)).remove("Test 1");
+    verify(wikiCache, times(1)).put("all", eq(existingWiki));
   }
 }

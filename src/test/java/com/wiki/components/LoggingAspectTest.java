@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class LoggingAspectTest {
@@ -28,23 +29,26 @@ class LoggingAspectTest {
   void testAfterLogServiceMethods() {
     when(joinPoint.getSignature()).thenReturn(signature);
     when(signature.getName()).thenReturn("someMethod");
-
     loggingAspect.afterLogServiceMethods(joinPoint);
+    verify(joinPoint).getSignature();
+    verify(signature).getName();
   }
 
   @Test
   void testBeforeLogCacheMethods() {
     when(joinPoint.getSignature()).thenReturn(signature);
     when(signature.getName()).thenReturn("cacheMethod");
-
     loggingAspect.beforeLogCacheMethods(joinPoint);
+    verify(joinPoint).getSignature();
+    verify(signature).getName();
   }
 
   @Test
   void testAfterLogCacheMethods() {
     when(joinPoint.getSignature()).thenReturn(signature);
     when(signature.getName()).thenReturn("cacheMethod");
-
     loggingAspect.afterLogCacheMethods(joinPoint);
+    verify(joinPoint).getSignature();
+    verify(signature).getName();
   }
 }
