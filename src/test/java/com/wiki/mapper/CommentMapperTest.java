@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-public class CommentMapperTest {
+class CommentMapperTest {
   @Test
   void testToDto() {
     // Arrange

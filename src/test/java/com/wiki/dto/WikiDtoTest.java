@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-public class WikiDtoTest {
+class WikiDtoTest {
   @Test
   void testGetterAndSetter() {
     String requestWiki = "Cats";

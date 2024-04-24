@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-public class CommentDtoTest {
+class CommentDtoTest {
   @Test
   void testGetterAndSetter() {
     Long id = 1L;

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class CommentTest {
+class CommentTest {
   @Test
   void testCommentConstructor() {
     Long id = 1L;

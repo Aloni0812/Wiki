@@ -9,7 +9,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.when;
 
-public class LoggingAspectTest {
+class LoggingAspectTest {
   @Mock
   private JoinPoint joinPoint;
 

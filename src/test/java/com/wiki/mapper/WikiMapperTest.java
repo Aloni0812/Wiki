@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WikiMapperTest {
+class WikiMapperTest {
   @Test
   void testToDto() {
     String requestWiki = "Cats";

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class DataCacheTest {
+class DataCacheTest {
   private  DataCache dataCache;
   @BeforeEach
   void setUp() {
