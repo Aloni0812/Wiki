@@ -23,8 +23,7 @@ public class DataCacheTest {
 
     assertEquals(value, retrievedValue);
   }
-// У меня их почти нет
-  // покрытие не считается заново при наличи Error при вот этом чеке. поэтому ты либо чини тесты что не работают, лиюо удали назуй
+
   @Test
   void putMaxSizeReached() {
     for (int i = 0; i < DataCache.getMAX_SIZE(); i++) {

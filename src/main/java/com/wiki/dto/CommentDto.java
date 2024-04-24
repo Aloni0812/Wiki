@@ -8,9 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * The type Comment dto.
- */
 @Getter
 @Setter
 @AllArgsConstructor
