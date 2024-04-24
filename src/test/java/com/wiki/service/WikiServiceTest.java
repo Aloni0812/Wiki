@@ -166,6 +166,6 @@ class WikiServiceTest {
     verify(wikiRepository, times(1)).findWikiByRequestWiki("Test 1");
     verify(wikiRepository, times(1)).saveAll(anyList());
     verify(wikiCache, times(1)).remove("Test 1");
-    verify(wikiCache, times(1)).put("all", eq(existingWiki));
+    verify(wikiCache, times(1)).put("all", existingWiki);
   }
 }
