@@ -11,6 +11,8 @@ import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,14 +40,17 @@ public class CommentService {
   }
 
   public Comment findComment(final Long id) {
-    Object cacheObject = commentCache.get(id.toString());
-    if (cacheObject instanceof Comment commentObject) {
-      return commentObject;
-    }
-    commentCache.put(id.toString(), commentRepository.findCommentById(id));
-    log.info("Found comment by id {}", id);
-    return commentRepository.findCommentById(id);
+    return Optional.ofNullable(commentCache.get(id.toString()))
+            .filter(Comment.class::isInstance)
+            .map(Comment.class::cast)
+            .orElseGet(() -> {
+              Comment comment = commentRepository.findCommentById(id);
+              commentCache.put(id.toString(), comment);
+              log.info("Found comment by id {}", id);
+              return comment;
+            });
   }
+
 
   public void deleteComment(final Long id) {
     Comment comment = commentRepository.findCommentById(id);

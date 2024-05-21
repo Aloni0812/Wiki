@@ -3,6 +3,7 @@ package com.wiki.controller;
 
 import com.wiki.dto.WikiDto;
 import com.wiki.model.Wiki;
+import com.wiki.service.CounterService;
 import com.wiki.service.WikiService;
 
 import java.util.List;
@@ -16,16 +17,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @RestController
 @RequestMapping("/api/v1/Wiki")
 @AllArgsConstructor
 public class WikiController {
   private final WikiService service;
+  static final Logger LOGGER = LogManager.getLogger(WikiController.class);
 
   @GetMapping
   public List<Wiki> findAllWiki() {
-    return service.findAllWiki();
+    List<Wiki> wikies = service.findAllWiki();
+    return wikies;
   }
 
   @PostMapping("saveWiki")

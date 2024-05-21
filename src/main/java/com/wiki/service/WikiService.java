@@ -95,10 +95,12 @@ public class WikiService {
     log.info("Found wiki by request: {} and author {}", requestWiki, author);
     return wiki;
   }
-  public List<Wiki> bulkSaveWiki(List<WikiDto> wikiDtoList) {
+
+  public List<Wiki> bulkSaveWiki(final List<WikiDto> wikiDtoList) {
     List<Wiki> wikisListToSave = new ArrayList<>();
     for (WikiDto wikiDto : wikiDtoList) {
-      Wiki wikiFind = wikiRepository.findWikiByRequestWiki(wikiDto.getRequestWiki());
+      Wiki wikiFind = wikiRepository
+              .findWikiByRequestWiki(wikiDto.getRequestWiki());
       if (wikiFind != null) {
         wikiCache.remove(wikiFind.getRequestWiki());
         wikiCache.put("all", wikiFind);
@@ -108,7 +110,7 @@ public class WikiService {
         wikisListToSave.add(WikiMapper.toEntity(wikiDto));
       }
     }
-    List<Wiki> returnList= new ArrayList<>();
+    List<Wiki> returnList = new ArrayList<>();
     for (WikiDto wikiDto : wikiDtoList) {
       returnList.add(WikiMapper.toEntity(wikiDto));
     }
