@@ -1,5 +1,6 @@
 package com.wiki.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class WikiDto {
+  @JsonIgnore
+  private Long id;
   @JsonProperty("requestWiki")
   private String requestWiki;
   @JsonProperty("answerWiki")

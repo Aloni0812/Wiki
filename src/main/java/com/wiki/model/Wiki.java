@@ -28,9 +28,6 @@ public class Wiki {
   private String requestWiki;
   @Column(columnDefinition = "text")
   private String answerWiki;
-  /**
-   * The Comment list.
-   */
   @OneToMany(cascade = CascadeType.ALL)
   private List<Comment> commentList;
 }

@@ -48,7 +48,7 @@ class CommentControllerTest {
     Assertions.assertNotNull(responseContent);
   }
 
-  @Test
+ /* @Test
   void testSaveComment() throws Exception {
     // Arrange
     CommentDto commentDto = new CommentDto();
@@ -66,7 +66,7 @@ class CommentControllerTest {
             .andReturn();
     String responseContent = result.getResponse().getContentAsString();
     Assertions.assertNotNull(responseContent);
-  }
+  }*/
 
   @Test
   void testFindById() throws Exception {

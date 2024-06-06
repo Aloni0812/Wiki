@@ -15,6 +15,15 @@ public final class WikiMapper {
       WikiDto wikiDto = new WikiDto();
       wikiDto.setRequestWiki(wiki.getRequestWiki());
       wikiDto.setAnswerWiki(wiki.getAnswerWiki());
+      wikiDto.setId(wiki.getId());
+      List<CommentDto> commentList = new ArrayList<>();
+      if (wiki.getCommentList() != null) {
+        for (Comment comment : wiki.getCommentList()) {
+          commentList.add(CommentMapper.toDto(comment));
+
+        }
+      }
+      wikiDto.setCommentDtoList(commentList);
       return wikiDto;
     }
     return null;
@@ -25,15 +34,18 @@ public final class WikiMapper {
       Wiki wiki = new Wiki();
       wiki.setRequestWiki(wikiDto.getRequestWiki());
       wiki.setAnswerWiki(wikiDto.getAnswerWiki());
-      if (wikiDto.getCommentDtoList() == null) {
-        return wiki;
-      }
       List<Comment> commentList = new ArrayList<>();
-      for (CommentDto commentDto : wikiDto.getCommentDtoList()) {
-        commentList.add(CommentMapper.toEntity(commentDto));
+     // wiki.setId(wikiDto.getId());
+      if (wikiDto.getCommentDtoList() != null) {
 
+
+        for (CommentDto commentDto : wikiDto.getCommentDtoList()) {
+          commentList.add(CommentMapper.toEntity(commentDto));
+
+        }
       }
-      wiki.setCommentList(commentList);
+        wiki.setCommentList(commentList);
+
       return wiki;
     }
     return null;

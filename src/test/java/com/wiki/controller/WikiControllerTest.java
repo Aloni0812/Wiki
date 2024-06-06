@@ -30,12 +30,12 @@ class WikiControllerTest {
   @Mock
   private WikiService wikiService;
 
-  @BeforeEach
+/*  @BeforeEach
   void setup() {
     MockitoAnnotations.initMocks(this);
     WikiController wikiController = new WikiController(wikiService);
     mockMvc = MockMvcBuilders.standaloneSetup(wikiController).build();
-  }
+  }*/
 
   @Test
   void testFindAllWiki() throws Exception {

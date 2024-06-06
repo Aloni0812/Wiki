@@ -10,6 +10,7 @@ public final class CommentMapper {
   public static CommentDto toDto(final Comment comment) {
     if (comment != null) {
       CommentDto commentDto = new CommentDto();
+      commentDto.setId(comment.getId());
       commentDto.setAuthor(comment.getAuthor());
       commentDto.setText(comment.getText());
       commentDto.setTime(comment.getTime());

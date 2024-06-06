@@ -13,6 +13,8 @@ public interface WikiRepository extends JpaRepository<Wiki, Long> {
   Wiki findWikiByRequestWiki(String requestWiki);
   Wiki saveAndFlush(Wiki wiki);
   List<Wiki> findAll();
+
+  Wiki findWikiById(Long id);
   Wiki findWikiByCommentListContains(Comment comment);
   @Query("SELECT w FROM Wiki w JOIN w.commentList c"
           + " WHERE c.author = :author " + "AND w.requestWiki = :requestWiki")

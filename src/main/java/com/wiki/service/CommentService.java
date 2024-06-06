@@ -27,13 +27,13 @@ public class CommentService {
   private final DataCache commentCache;
 
   public List<Comment> findAllComment() {
-    Object cacheObject = commentCache.get("all");
+    /*Object cacheObject = commentCache.get("all");
     if (cacheObject instanceof List<?> list && list.get(0)
             instanceof Comment && !list.isEmpty()) {
       log.info("Loading data from the cache");
       return (List<Comment>) list;
     }
-    commentCache.put("all", commentRepository.findAll());
+    commentCache.put("all", commentRepository.findAll());*/
     log.info("Loading data from databases");
     log.info("Loading Cache from databases");
     return commentRepository.findAll();
@@ -61,8 +61,6 @@ public class CommentService {
     if (wiki != null) {
       wiki.getCommentList().remove(comment);
     }
-
-
     log.info("Deleted comment by id {}", id);
     commentRepository.deleteById(id);
     commentCache.remove(id.toString());
@@ -71,6 +69,7 @@ public class CommentService {
   public Comment updateComment(final CommentDto commentDto) {
     commentRepository.findCommentById(commentDto.getId())
             .setText(commentDto.getText());
+    commentRepository.findCommentById(commentDto.getId()).setAuthor(commentDto.getAuthor());
     commentCache.remove(commentDto.getId().toString());
     commentCache.put("all", CommentMapper.toEntity(commentDto));
     log.info("Updated comment with id {}", commentDto.getId());
@@ -79,10 +78,10 @@ public class CommentService {
   public Comment saveComment(final CommentDto commentDto) {
     Comment comment = Objects.requireNonNull(CommentMapper
             .toEntity(commentDto));
-    commentRepository.save(comment);
-    commentCache.put("all", comment);
+    //Comment comment = (CommentMapper.toEntity(commentDto));
+    //commentCache.put("all", comment);
     log.info("Saved comment with id {}", comment.getId());
-    return comment;
+    return commentRepository.save(comment);
   }
 
 }

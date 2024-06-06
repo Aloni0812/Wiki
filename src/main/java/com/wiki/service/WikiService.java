@@ -11,6 +11,8 @@ import jakarta.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
@@ -26,26 +28,26 @@ public class WikiService {
   private final DataCache wikiCache;
 
   public List<Wiki> findAllWiki() {
-    Object wikiObject = wikiCache.get("all");
+   /* Object wikiObject = wikiCache.get("all");
     if (wikiObject instanceof List<?> list && list.get(0)
             instanceof Wiki && !list.isEmpty()) {
       log.info("Loading data from the cache");
       return (List<Wiki>) list;
     }
-    wikiCache.put("all", wikiRepository.findAll());
+    wikiCache.put("all", wikiRepository.findAll());*/
     log.info("Loading data from databases");
     log.info("Loading Cache from databases");
     return wikiRepository.findAll();
   }
 
   public Wiki findByRequest(final String requestWiki) {
-    Object cacheObject = wikiCache.get(requestWiki);
+ /*   Object cacheObject = wikiCache.get(requestWiki);
     if (cacheObject instanceof Wiki wikiObject) {
       return wikiObject;
-    }
+    }*/
     Wiki wiki = wikiRepository.findWikiByRequestWiki(requestWiki);
-    wikiCache.put(requestWiki, wiki);
-    log.info("Found wiki by request {}", wiki.getRequestWiki());
+  //  wikiCache.put(requestWiki, wiki);
+   // log.info("Found wiki by request {}", wiki.getRequestWiki());
     return wiki;
   }
 
@@ -58,24 +60,29 @@ public class WikiService {
       }
       log.info("Deleted wiki by request {}", wikiDelete.getRequestWiki());
       wikiRepository.delete(wikiDelete);
-      wikiCache.remove(wikiDelete.getRequestWiki());
     }
   }
 
   public Wiki updateWiki(final WikiDto wikidto) {
-    wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki())
+    wikiRepository.findWikiById(wikidto.getId())
+                    .setRequestWiki(wikidto.getRequestWiki());
+    wikiRepository.findWikiById(wikidto.getId())
             .setAnswerWiki(wikidto.getAnswerWiki());
-    wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki())
+    wikiRepository.findWikiById(wikidto.getId())
             .setCommentList(WikiMapper.toEntity(wikidto).getCommentList());
-    wikiCache.remove(wikidto.getRequestWiki());
-    wikiCache.put(wikidto.getRequestWiki(), WikiMapper.toEntity(wikidto));
-    log.info("Updated wiki with request {}", wikidto.getRequestWiki());
-    return wikiRepository.findWikiByRequestWiki(wikidto.getRequestWiki());
+   // wikiCache.remove(wikidto.getRequestWiki());
+    //wikiCache.put(wikidto.getRequestWiki(), WikiMapper.toEntity(wikidto));
+    //log.info("Updated wiki with request {}", wikidto.getRequestWiki());
+    return wikiRepository.findWikiById(wikidto.getId());
   }
 
   public Wiki saveWiki(final WikiDto wikiDto) {
+
     Wiki wiki = WikiMapper.toEntity(wikiDto);
-    wikiCache.put("all", wiki);
+    if(wiki.getCommentList()==null) {
+      List<Comment> commentList = new ArrayList<>();
+      wiki.setCommentList(commentList);
+    }
     log.info("Saved wiki with request {}", wiki.getRequestWiki());
     return wikiRepository.save(wiki);
   }
@@ -115,5 +122,17 @@ public class WikiService {
       returnList.add(WikiMapper.toEntity(wikiDto));
     }
     return wikiRepository.saveAll(wikisListToSave);
+  }
+
+  public Wiki findWikiId(final Long id) {
+    return Optional.ofNullable(wikiCache.get(id.toString()))
+            .filter(Wiki.class::isInstance)
+            .map(Wiki.class::cast)
+            .orElseGet(() -> {
+              Wiki wiki = wikiRepository.findWikiById(id);
+             // wikiCache.put(id.toString(), wiki);
+              //log.info("Found wiki by id {}", id);
+              return wiki;
+            });
   }
 }

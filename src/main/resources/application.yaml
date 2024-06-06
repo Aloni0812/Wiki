@@ -1,6 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/wiki_db
+    url: jdbc:postgresql://${DATABASE_URL}/wiki_db
+    #url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: 123
     driver-class-name: org.postgresql.Driver

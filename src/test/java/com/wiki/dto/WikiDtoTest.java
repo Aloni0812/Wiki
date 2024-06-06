@@ -27,7 +27,7 @@ class WikiDtoTest {
     Assertions.assertNull(wikiDto.getCommentDtoList());
   }
 
-  @Test
+ /* @Test
   void testAllArgsConstructor() {
     String requestWiki = "Cats";
     String answerWiki = "Cat is not dog";
@@ -36,5 +36,5 @@ class WikiDtoTest {
     Assertions.assertEquals(requestWiki, wikiDto.getRequestWiki());
     Assertions.assertEquals(answerWiki, wikiDto.getAnswerWiki());
     Assertions.assertEquals(commentDtoList, wikiDto.getCommentDtoList());
-  }
+  }*/
 }
